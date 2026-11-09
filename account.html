@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>החשבון שלי · אדונית התבלינים · הדמיה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Assistant:wght@400;600;700&display=swap">
+<link rel="icon" href="assets/img/site/logo.png">
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+.acc-nav{display:flex;flex-direction:column;gap:4px}
+.acc-nav a{padding:10px 12px;border-radius:12px;text-decoration:none;font-weight:600}
+.acc-nav a:hover{background:var(--soft)}
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:20px}
+.order{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px;border-radius:16px;background:var(--soft)}
+.order .thumbs{display:flex;gap:4px}
+.order .thumbs img{width:44px;height:44px;border-radius:10px;object-fit:contain;background:#fff}
+.wallet{background:var(--brown);color:#fff;border-radius:var(--r);padding:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.wallet .big{font:700 40px var(--head);color:var(--yellow)}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="page-head">
+    <h1>שלום, [שם הלקוח]</h1>
+    <p>האזור האישי. כל הנתונים בעמוד הזה הם דוגמה להדמיה.</p>
+  </div>
+  <div class="with-side" style="margin-top:16px">
+    <aside class="side"><nav class="acc-nav" aria-label="החשבון שלי">
+      <a href="#reorder">שחזור הזמנה</a><a href="#fixed">הזמנה קבועה</a><a href="#wallet">הארנק והמועדון</a><a href="#favs">המועדפים שלי</a><a href="#giftcard">גיפט קארד</a>
+    </nav></aside>
+    <div class="main-col" style="display:flex;flex-direction:column;gap:18px">
+
+      <section class="panel" id="reorder">
+        <div class="sec-head" style="margin:0"><div class="t"><h2>שחזור הזמנה</h2><p>לוחצים, וכל ההזמנה חוזרת לעגלה.</p></div><div data-plug="reorder,core"></div></div>
+        <div id="orders" style="display:flex;flex-direction:column;gap:10px"></div>
+      </section>
+
+      <section class="panel" id="fixed">
+        <div class="sec-head" style="margin:0"><div class="t"><h2>הזמנה קבועה</h2><p>הסל הקבוע שלכם מגיע אוטומטית. משנים, דוחים או עוצרים מתי שרוצים.</p></div><div data-plug="subs"></div></div>
+        <div class="grid g3">
+          <label class="field">כל כמה זמן<select><option>כל שבוע</option><option selected>כל שבועיים</option><option>כל חודש</option></select></label>
+          <label class="field">יום משלוח<select><option>שלישי</option><option>חמישי</option></select></label>
+          <label class="field">איך מקבלים<select><option>משלוח עד הבית</option><option>איסוף מסניף פרדס חנה</option><option>איסוף מסניף רעננה</option></select></label>
+        </div>
+        <div id="fixed-list" class="grid g4"></div>
+        <p class="muted" style="margin:0;font-size:14.5px">כדי להוסיף מוצר, לוחצים "הוספה להזמנה הקבועה" בדף המוצר. חשוב: חיוב אוטומטי עם סליקה ישראלית דורש את התוסף בתשלום.</p>
+      </section>
+
+      <section class="panel" id="wallet">
+        <div class="sec-head" style="margin:0"><div class="t"><h2>הארנק והמועדון</h2><p>5% חוזרים לארנק על כל קנייה של מוצרים בתפזורת, באתר ובסניפים.</p></div><div data-plug="wallet,comax"></div></div>
+        <div class="wallet"><div><span>יתרה בארנק</span><div class="big">[יתרה] ₪</div></div><div style="max-width:420px">מממשים באתר ובכל 8 הסניפים. הקופות בסניפים והאתר מחוברים, כי המועדון מסונכרן עם קומקס.</div></div>
+        <div class="tbl"><table><thead><tr><th>תאריך</th><th>איפה</th><th>קנייה בתפזורת</th><th>חזר לארנק</th></tr></thead>
+          <tbody><tr><td>[תאריך]</td><td>אתר</td><td>[סכום]</td><td>5%</td></tr><tr><td>[תאריך]</td><td>סניף רעננה</td><td>[סכום]</td><td>5%</td></tr></tbody></table></div>
+      </section>
+
+      <section class="panel" id="favs">
+        <div class="sec-head" style="margin:0"><div class="t"><h2>המועדפים שלי</h2><p>מוצרים ששמרתם בלב.</p></div><div data-plug="wishlist"></div></div>
+        <div class="grid g4" id="fav-list"></div>
+      </section>
+
+      <section class="panel" id="giftcard">
+        <div class="sec-head" style="margin:0"><div class="t"><h2>גיפט קארד</h2><p>כרטיס מתנה דיגיטלי, לשימוש באתר.</p></div><div data-plug="giftcard"></div></div>
+        <div class="chips"><button class="chip" aria-pressed="false">100 ₪</button><button class="chip" aria-pressed="true">200 ₪</button><button class="chip" aria-pressed="false">300 ₪</button><button class="chip" aria-pressed="false">סכום אחר</button></div>
+        <div class="grid g2"><label class="field">למי<input placeholder="שם המקבל"></label><label class="field">ברכה<input placeholder="מזל טוב!"></label></div>
+        <button class="btn pri" style="align-self:flex-start" onclick="demoToast('הדמיה: הגיפט קארד נוסף לעגלה')">הוספה לעגלה</button>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+window.pageInit = function () {
+  const sample = [
+    { d: '[תאריך הזמנה]', ids: productsIn(['pure']).slice(0, 3).concat(productsIn(['nuts']).slice(0, 2)).map(p => p.id) },
+    { d: '[תאריך הזמנה]', ids: productsIn(['coffee']).slice(0, 2).concat(productsIn(['dried']).slice(0, 2)).map(p => p.id) }
+  ];
+  document.getElementById('orders').innerHTML = sample.map((o, i) => {
+    const ps = o.ids.map(productById);
+    return `<div class="order"><div class="thumbs">${ps.slice(0, 4).map(p => `<img src="${p.img}" alt="">`).join('')}</div><div><b>הזמנה #${1000 + i} · ${o.d}</b><br><span class="muted">${ps.length} מוצרים · ${money(ps.reduce((s, p) => s + p.price, 0))}</span></div><button class="btn pri sm" data-reorder="${i}">הזמנה חוזרת</button></div>`;
+  }).join('');
+  document.getElementById('orders').addEventListener('click', e => { const b = e.target.closest('[data-reorder]'); if (!b) return; sample[+b.dataset.reorder].ids.forEach(id => addToCart(id, 'unit', 1)); demoToast('ההזמנה חזרה לעגלה'); openCart(true); });
+  const fx = demoStore.get('fixed', []);
+  const fixed = (fx.length ? fx.map(productById) : productsIn(['pure', 'nuts']).slice(0, 4)).filter(Boolean);
+  document.getElementById('fixed-list').innerHTML = fixed.map(p => productCard(p, { plugs: false })).join('');
+  const favs = demoStore.get('favs', []).map(productById).filter(Boolean);
+  document.getElementById('fav-list').innerHTML = favs.length ? favs.map(p => productCard(p, { plugs: false })).join('') : '<p class="muted">עוד אין מועדפים. לוחצים על הלב בכרטיס של מוצר.</p>';
+};
+</script>
+</body>
+</html>

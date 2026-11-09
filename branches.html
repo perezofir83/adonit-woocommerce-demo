@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>סניפים וסדנאות · אדונית התבלינים · הדמיה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Assistant:wght@400;600;700&display=swap">
+<link rel="icon" href="assets/img/site/logo.png">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<main class="wrap">
+  <div class="page-head">
+    <nav class="crumbs" aria-label="פירורי לחם"><a href="index.html">דף הבית</a><span>›</span><span>סניפים וסדנאות</span></nav>
+    <h1>בקרו אותנו בסניפים</h1>
+    <p>8 סניפים, אתר אחד. מה שקונים באתר אפשר לאסוף מכל סניף, והארנק של המועדון עובד בכל מקום.</p>
+  </div>
+
+  <section class="sec" style="padding-top:16px">
+    <div class="with-side">
+      <div class="main-col">
+        <div class="grid g2" id="branches" style="gap:12px"></div>
+      </div>
+      <aside class="side" style="min-height:300px">
+        <h4>מפת הסניפים</h4>
+        <div class="ph" style="flex:1;min-height:260px">[מפת Google עם 8 הסניפים]</div>
+        <div data-plug="locator"></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="sec-head"><div class="t"><h2>סדנאות ואירועים בסניפים</h2><p>לומדים לבשל עם תבלינים, טועמים ומכירים את המוצרים. כל התאריכים כאן הם דוגמה.</p></div><div data-plug="workshops"></div></div>
+    <div class="grid g3">
+      <article class="card" style="padding:22px;display:flex;flex-direction:column;gap:8px"><span class="tag green">סדנה</span><h3>סדנת תערובות תבלינים</h3><span class="muted">[תאריך] · סניף פרדס חנה · [מספר] מקומות</span><p style="margin:0">מכירים את התבלינים הטהורים, טוחנים ומרכיבים תערובת אישית הביתה.</p><div class="price-row"><span class="price">[מחיר]</span><button class="btn pri sm" onclick="demoToast('הדמיה: נרשמתם לסדנה')">הרשמה</button></div></article>
+      <article class="card" style="padding:22px;display:flex;flex-direction:column;gap:8px"><span class="tag green">ערב טעימות</span><h3>ערב טעימות: בסטה עולמית</h3><span class="muted">[תאריך] · סניף רעננה · [מספר] מקומות</span><p style="margin:0">טועמים מוצרים מהמטבח ההודי, האיטלקי והאסייתי.</p><div class="price-row"><span class="price">[מחיר]</span><button class="btn pri sm" onclick="demoToast('הדמיה: נרשמתם לערב הטעימות')">הרשמה</button></div></article>
+      <article class="card" style="padding:22px;display:flex;flex-direction:column;gap:8px"><span class="tag green">סדנה</span><h3>מארזים לחג: אורזים יחד</h3><span class="muted">[תאריך] · סניף תל אביב · [מספר] מקומות</span><p style="margin:0">מרכיבים מארז מתנה אישי, ולוקחים אותו הביתה.</p><div class="price-row"><span class="price">[מחיר]</span><button class="btn pri sm" onclick="demoToast('הדמיה: נרשמתם לסדנה')">הרשמה</button></div></article>
+    </div>
+  </section>
+</main>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+window.pageInit = function () {
+  const B = [
+    ['פרדס חנה', 'רח\' החרובים 7', '053-3873680', 'א-ה 7:15-21:00 · ו 7:15-16:00'],
+    ['כפר יונה', 'קניון כפר יונה, בן גוריון 11', '053-4362202', 'א-ה 9:00-20:30 · ו 8:30-14:00'],
+    ['רעננה', 'הנופר 2', '053-3009968', 'א-ה 7:30-20:00 · ו 7:30-15:00'],
+    ['M הדרך', 'קניון M הדרך, בית חירות', '053-3935334', 'א-ה 8:30-21:00 · ו 8:00-16:30 · שבת 9:00-21:00'],
+    ['ראש העין', 'שבזי 225', '050-9948474', 'א-ה 8:00-20:00 · ו 8:00-15:00'],
+    ['עפולה', 'יהושע חנקין 8', '052-3871376', 'א-ה 8:00-21:00 · ו 8:00-15:00'],
+    ['קריית אונו', 'לוי אשכול 77', '052-8674910', 'א-ה 8:30-21:00 · ו 8:30-15:00'],
+    ['תל אביב', 'ולטר מוזס 12', '052-5575178', 'א-ה 8:00-20:00 · ו 8:00-15:00']
+  ];
+  document.getElementById('branches').innerHTML = B.map(([n, a, t, h]) => `<div class="card" style="padding:18px;display:flex;flex-direction:column;gap:4px">
+    <div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><h3 style="font-size:20px">סניף ${n}</h3>${n === 'M הדרך' ? '<span class="tag green">פתוח גם בשבת</span>' : ''}</div>
+    <span>${a}</span><span class="muted">${h}</span><span style="direction:ltr;text-align:right">${t}</span>
+    <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap"><a class="btn sec sm" href="https://waze.com/ul?q=${encodeURIComponent('אדונית התבלינים ' + n)}" target="_blank" rel="noopener">ניווט</a><span class="tag" style="align-self:center">איסוף עצמי</span></div></div>`).join('');
+};
+</script>
+</body>
+</html>

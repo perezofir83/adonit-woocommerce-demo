@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>קטגוריה · אדונית התבלינים · הדמיה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Assistant:wght@400;600;700&display=swap">
+<link rel="icon" href="assets/img/site/logo.png">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<main class="wrap">
+  <div class="page-head">
+    <nav class="crumbs" aria-label="פירורי לחם"><a href="index.html">דף הבית</a><span>›</span><span id="crumb"></span></nav>
+    <h1 id="title"></h1>
+    <p id="sub"></p>
+  </div>
+  <div class="chips" id="subcats" style="margin:12px 0 22px"></div>
+  <div class="with-side">
+    <aside class="side" aria-label="סינון">
+      <div><h4>סינון</h4><div data-plug="filter"></div></div>
+      <div><h4>לפי צורך</h4>
+        <label><input type="checkbox" data-need="gf"> ללא גלוטן</label>
+        <label><input type="checkbox" data-need="organic"> אורגני</label>
+        <label><input type="checkbox" data-need="vegan"> טבעוני</label>
+        <label><input type="checkbox" data-need="keto"> קיטו</label>
+        <label><input type="checkbox" data-need="sugarfree"> ללא סוכר</label>
+        <label><input type="checkbox" data-own> מתוצרת אדונית</label>
+        <label><input type="checkbox" data-bulk> נמכר במשקל</label>
+      </div>
+      <div><h4>מחיר עד</h4>
+        <input type="range" id="price" min="5" max="300" value="300" step="5" style="width:100%;accent-color:var(--green)" aria-label="מחיר מקסימלי">
+        <div class="muted" id="price-out">כל המחירים</div>
+      </div>
+      <div class="card" style="padding:14px;background:var(--green-soft);border:0;font-size:14.5px">
+        <b>קונים במשקל?</b><br>בוחרים "לפי ק"ג" בכרטיס. המחיר הוא הערכה, והחיוב הסופי רק אחרי הליקוט.
+        <div data-plug="unitprice,j5" style="margin-top:8px"></div>
+      </div>
+    </aside>
+    <div class="main-col">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+        <span class="muted" id="count"></span>
+        <label class="field" style="flex-direction:row;align-items:center;gap:8px">מיון
+          <select id="sort" style="min-height:40px"><option value="">מומלץ</option><option value="up">מחיר: מהנמוך</option><option value="down">מחיר: מהגבוה</option><option value="kg">מחיר לק"ג</option></select>
+        </label>
+      </div>
+      <div class="grid g4" id="grid"></div>
+    </div>
+  </div>
+</main>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+window.pageInit = function () {
+  const qs = new URLSearchParams(location.search);
+  const c = qs.get('c'), m = qs.get('m'), q = qs.get('q');
+  let keys = [], title = '', sub = '', subcats = [];
+  const menu = MENU.find(x => x.id === m) || MENU.find(x => x.groups.some(g => g[1].includes(c)));
+  if (q) { title = 'תוצאות חיפוש: ' + q; sub = ''; }
+  else if (m && menu) { keys = menu.groups.flatMap(g => g[1]); title = menu.name; subcats = keys; }
+  else if (c) { keys = [c]; title = CATS[c] || 'מוצרים'; if (menu) subcats = menu.groups.flatMap(g => g[1]); }
+  if (c === 'pure' || c === 'blends') sub = 'התבלינים והתערובות שאנחנו טוחנים ומערבבים בעצמנו, מחומרים טבעיים בלבד.';
+  if (m === 'world') sub = 'בסטה עולמית: מוצרים מהמטבחים של העולם.';
+  if (c === 'roasted') sub = 'פיצוחים בקלייה במקום.';
+  document.getElementById('title').textContent = title;
+  document.getElementById('crumb').textContent = title;
+  document.getElementById('sub').textContent = sub;
+  document.title = title + ' · אדונית התבלינים · הדמיה';
+  document.getElementById('subcats').innerHTML = subcats.map(k => `<a class="chip ${k === c ? 'on' : ''}" href="category.html?c=${k}">${esc(CATS[k])}</a>`).join('');
+  const base = q ? PRODUCTS.filter(p => p.name.includes(q)) : productsIn(keys);
+  const grid = document.getElementById('grid');
+  function render() {
+    const needs = [...document.querySelectorAll('[data-need]:checked')].map(x => x.dataset.need);
+    const ownOnly = document.querySelector('[data-own]').checked, bulkOnly = document.querySelector('[data-bulk]').checked;
+    const max = +document.getElementById('price').value;
+    document.getElementById('price-out').textContent = max >= 300 ? 'כל המחירים' : 'עד ' + max + ' ₪';
+    let list = base.filter(p => needs.every(n => p.cats.includes(n)) && (!ownOnly || p.cats.includes('pure') || p.cats.includes('blends')) && (!bulkOnly || isBulk(p)) && p.price <= max);
+    const s = document.getElementById('sort').value;
+    if (s === 'up') list.sort((a, b) => a.price - b.price);
+    if (s === 'down') list.sort((a, b) => b.price - a.price);
+    if (s === 'kg') list = list.filter(p => p.g).sort((a, b) => a.price / a.g - b.price / b.g);
+    document.getElementById('count').textContent = list.length + ' מוצרים (בהדמיה מוצג חלק מהקטלוג)';
+    grid.innerHTML = list.length ? list.map(p => productCard(p)).join('') : '<p class="muted">אין מוצרים שמתאימים לסינון. נסו להסיר סינון.</p>';
+  }
+  document.querySelector('.side').addEventListener('input', render);
+  document.getElementById('sort').addEventListener('change', render);
+  render();
+};
+</script>
+</body>
+</html>

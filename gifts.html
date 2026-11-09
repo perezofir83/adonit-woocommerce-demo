@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>מארזים ומתנות · אדונית התבלינים · הדמיה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Assistant:wght@400;600;700&display=swap">
+<link rel="icon" href="assets/img/site/logo.png">
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+.box-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column}
+.box-card img{aspect-ratio:1/1;object-fit:cover;width:100%}
+.box-card .b{padding:14px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.box-card details{font-size:14.5px}
+.box-card summary{cursor:pointer;color:var(--green-dk);font-weight:700}
+.pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;max-height:520px;overflow:auto;padding:4px}
+.pick label{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:8px;display:flex;flex-direction:column;gap:6px;cursor:pointer;font-size:14px;position:relative}
+.pick label:has(input:checked){border-color:var(--green);background:var(--green-soft)}
+.pick input{position:absolute;top:10px;left:10px;width:20px;height:20px;accent-color:var(--green)}
+.pick img{aspect-ratio:1/1;object-fit:contain;background:#fff;border-radius:10px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px;counter-reset:s}
+.steps div{background:#fff;border-radius:var(--r);padding:18px;border:1px solid var(--line)}
+.steps b{display:block;font-size:17px;margin-bottom:4px}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="page-head">
+    <nav class="crumbs" aria-label="פירורי לחם"><a href="index.html">דף הבית</a><span>›</span><span>מארזים ומתנות</span></nav>
+    <h1>מארזים ומתנות</h1>
+    <p>מתנות הן עולם ומלואו. אצלנו באדונית אפשר להרכיב מארזים לכל מטרה, חשק וקונספט, ובכל תקציב.</p>
+  </div>
+
+  <section class="sec" style="padding-top:10px">
+    <div class="card" style="padding:20px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b style="min-width:70px">תקציב</b><div class="chips" id="f-b"></div></div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b style="min-width:70px">אירוע</b><div class="chips" id="f-o"></div></div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b style="min-width:70px">למי</b><div class="chips" id="f-p"></div></div>
+      <div data-plug="filter"></div>
+    </div>
+    <p class="muted" id="count" style="margin:14px 0"></p>
+    <div class="grid g4" id="boxes"></div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="sec-head"><div class="t"><h2>מארזים לרגעים בחיים</h2><p>לא רק לחגים. מארזים לאירועים אישיים.</p></div><div data-plug="core,filter"></div></div>
+    <div class="grid g3">
+      <div class="card" style="padding:22px;display:flex;flex-direction:column;gap:8px"><span class="tag">רעיון חדש</span><h3>מארזי יום הולדת</h3><p class="muted" style="margin:0">קולקציה קבועה לימי הולדת. צריך להרכיב מארזים ולצלם.</p></div>
+      <div class="card" style="padding:22px;display:flex;flex-direction:column;gap:8px"><span class="tag">רעיון חדש</span><h3>מארז ליולדת</h3><p class="muted" style="margin:0">פינוק להורים הטריים: חליטות, פירות יבשים ומתוקים.</p></div>
+      <div class="card" style="padding:22px;display:flex;flex-direction:column;gap:8px"><span class="tag">רעיון חדש</span><h3>מארז חנוכת בית</h3><p class="muted" style="margin:0">תבלינים בסיסיים, שמן זית וכלי מטבח לבית החדש.</p></div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="card" style="padding:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px;align-items:center;background:var(--brown);color:#fff;border:0">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span class="tag" style="align-self:flex-start">רעיון חדש</span>
+        <h2 style="font-size:34px">קופסת ההפתעה של אדונית</h2>
+        <p style="margin:0;color:#EADFD2">קופסה במחיר קבוע עם מוצרים שאנחנו בוחרים: תבלין חדש, משהו מתוק ומשהו מהבסטה העולמית. כיף לקנות וכיף לתת.</p>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span class="price" style="color:var(--yellow)">[מחיר קבוע]</span><button class="btn gold" onclick="demoToast('הדמיה: קופסת ההפתעה נוספה לעגלה')">לקופסת ההפתעה</button></div>
+        <div data-plug="core"></div>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px" id="mystery"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="build" style="padding-top:0">
+    <div class="sec-head"><div class="t"><h2>הרכיבו מארז בעצמכם</h2><p>בוחרים גודל, ממלאים במוצרים שאוהבים, ואנחנו אורזים ושולחים.</p></div><div data-plug="composite"></div></div>
+    <div class="with-side">
+      <aside class="side" style="position:sticky;top:12px">
+        <h4>1. גודל המארז</h4>
+        <div class="chips" id="sizes"></div>
+        <h4>2. בחרתם</h4>
+        <div id="chosen" class="muted">עוד לא בחרתם מוצרים.</div>
+        <div class="progress"><i id="fill" style="width:0"></i></div>
+        <div style="display:flex;justify-content:space-between"><span>מחיר המוצרים</span><b id="btotal">0 ₪</b></div>
+        <span class="muted" style="font-size:14px">+ אריזה וברכה אישית: [מחיר אריזה]</span>
+        <button class="btn pri" id="badd">3. הוספת המארז לעגלה</button>
+      </aside>
+      <div class="main-col">
+        <div class="chips" id="bcats" style="margin-bottom:12px"></div>
+        <div class="pick" id="pick"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="sec-head"><div class="t"><h2>איך זה עובד</h2></div><div data-plug="content"></div></div>
+    <div class="steps">
+      <div><b>בוחרים מארז</b>מארז מוכן, או מרכיבים לבד.</div>
+      <div><b>כותבים ברכה</b>ברכה אישית בכרטיס, בלי עלות.</div>
+      <div><b>אנחנו אורזים</b>באהבה, באריזה ששומרת על הסביבה.</div>
+      <div><b>שולחים לכל הארץ</b>עד 5 ימי עסקים, לכל כתובת.</div>
+    </div>
+    <p style="margin-top:16px"><a href="business.html"><b>מזמינים לעובדים או ללקוחות? למחלקה העסקית ←</b></a></p>
+  </section>
+</main>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+window.pageInit = function () {
+  const meta = {
+    'מארז רגע של חג': ['holiday'], 'מארז תפוח בדבש': ['holiday', 'sweet'], 'מארז באהבה לשנה החדשה': ['holiday'], 'מארז חגיגי - 1': ['holiday'],
+    'מארז חגיגי - 2': ['holiday'], 'מארז קסם הדבש': ['holiday', 'sweet'], 'מארז רימון': ['holiday', 'thanks'], 'מארז דגים': ['thanks', 'chef'],
+    'מארז בלסמיקו': ['thanks', 'chef'], 'מארז שוק': ['thanks', 'chef'], 'מארז כחול - לבן': ['thanks', 'holiday'], 'מארז אדונית מהלב': ['cheer', 'sweet']
+  };
+  const OCC = { holiday: 'חג', thanks: 'תודה', cheer: 'עידוד ואהבה', birthday: 'יום הולדת', baby: 'ליולדת' };
+  const PER = { chef: 'לשף בבית', sweet: 'לאוהבי מתוקים', coffee: 'לאוהבי קפה' };
+  const BUD = { all: 'הכול', 150: 'עד 150 ₪', 250: 'עד 250 ₪', 350: 'עד 350 ₪' };
+  const qs = new URLSearchParams(location.search);
+  const st = { b: qs.get('b') || 'all', o: qs.get('o') || 'all', p: qs.get('p') || 'all' };
+  const boxes = productsIn(['boxes']).filter(p => p.name.startsWith('מארז'));
+  const chips = (id, map, key) => { document.getElementById(id).innerHTML = Object.entries(Object.assign(key === 'b' ? {} : { all: 'הכול' }, map)).map(([k, v]) => `<button class="chip" data-k="${key}" data-v="${k}" aria-pressed="${st[key] === k}">${v}</button>`).join(''); };
+  function render() {
+    chips('f-b', BUD, 'b'); chips('f-o', OCC, 'o'); chips('f-p', PER, 'p');
+    const list = boxes.filter(x => {
+      const m = meta[x.name] || [];
+      return (st.b === 'all' || x.price <= +st.b) && (st.o === 'all' || m.includes(st.o)) && (st.p === 'all' || m.includes(st.p));
+    });
+    document.getElementById('count').textContent = list.length ? list.length + ' מארזים מתאימים' : 'אין עדיין מארז מוכן לבחירה הזו. אפשר להרכיב מארז בעצמכם למטה.';
+    document.getElementById('boxes').innerHTML = list.map(x => `<article class="box-card"><img src="${x.img}" alt="${esc(x.name)}" loading="lazy"><div class="b">
+      <div class="chips">${(meta[x.name] || []).map(k => `<span class="tag">${OCC[k] || PER[k]}</span>`).join('')}</div>
+      <h3 style="font-size:18px">${esc(x.name)}</h3>
+      <details><summary>מה יש במארז?</summary><p class="muted" style="margin:6px 0 0">[רשימת המוצרים במארז, מתוך תיאור המוצר באתר]</p></details>
+      <div class="price-row" style="margin-top:auto"><span class="price">${money(x.price)}</span><button class="btn pri sm" data-add="${x.id}">הוספה לעגלה</button></div>
+    </div></article>`).join('');
+  }
+  document.addEventListener('click', e => { const c = e.target.closest('[data-k]'); if (c) { st[c.dataset.k] = c.dataset.v; render(); } });
+  render();
+
+  document.getElementById('mystery').innerHTML = productsIn(['blends', 'halva', 'asian']).filter((p, i) => i % 3 === 0).slice(0, 6).map(p => `<img src="${p.img}" alt="" style="aspect-ratio:1/1;object-fit:contain;background:#fff;border-radius:12px">`).join('');
+
+  // build your own box
+  const SIZES = [['s', 'קטן · 4 מוצרים', 4], ['m', 'בינוני · 6 מוצרים', 6], ['l', 'גדול · 8 מוצרים', 8]];
+  const B = { size: 'm', pick: [] , cat: 'blends' };
+  const BCATS = { blends: 'תערובות', halva: 'חלבה', honey: 'דבש', coffee: 'קפה', dried: 'פירות יבשים', tea: 'תה', chocolate: 'שוקולד', oils: 'שמנים' };
+  function drawBuild() {
+    const max = SIZES.find(s => s[0] === B.size)[2];
+    document.getElementById('sizes').innerHTML = SIZES.map(([k, t]) => `<button class="chip" data-size="${k}" aria-pressed="${k === B.size}">${t}</button>`).join('');
+    document.getElementById('bcats').innerHTML = Object.entries(BCATS).map(([k, t]) => `<button class="chip" data-bcat="${k}" aria-pressed="${k === B.cat}">${t}</button>`).join('');
+    document.getElementById('pick').innerHTML = productsIn([B.cat]).map(p => `<label><input type="checkbox" data-pick="${p.id}" ${B.pick.includes(p.id) ? 'checked' : ''} ${!B.pick.includes(p.id) && B.pick.length >= max ? 'disabled' : ''}><img src="${p.img}" alt="" loading="lazy">${esc(p.name)}<b>${money(p.price)}</b></label>`).join('');
+    const ps = B.pick.map(productById);
+    document.getElementById('chosen').innerHTML = ps.length ? ps.map(p => `• ${esc(p.name)}`).join('<br>') + `<br><b>${ps.length} מתוך ${max}</b>` : 'עוד לא בחרתם מוצרים.';
+    document.getElementById('fill').style.width = (ps.length / max * 100) + '%';
+    document.getElementById('btotal').textContent = money(ps.reduce((s, p) => s + p.price, 0));
+  }
+  document.getElementById('build').addEventListener('click', e => {
+    const s = e.target.closest('[data-size]'); if (s) { B.size = s.dataset.size; const max = SIZES.find(x => x[0] === B.size)[2]; B.pick = B.pick.slice(0, max); drawBuild(); }
+    const c = e.target.closest('[data-bcat]'); if (c) { B.cat = c.dataset.bcat; drawBuild(); }
+  });
+  document.getElementById('pick').addEventListener('change', e => { const id = e.target.dataset.pick; B.pick = e.target.checked ? B.pick.concat(id) : B.pick.filter(x => x !== id); drawBuild(); });
+  document.getElementById('badd').onclick = () => { if (!B.pick.length) { demoToast('בחרו לפחות מוצר אחד'); return; } B.pick.forEach(id => addToCart(id, 'unit', 1)); demoToast('המארז נוסף לעגלה'); };
+  drawBuild();
+};
+</script>
+</body>
+</html>

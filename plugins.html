@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>מפת הפלאגינים · אדונית התבלינים · הדמיה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Assistant:wght@400;600;700&display=swap">
+<link rel="icon" href="assets/img/site/logo.png">
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0}
+.sum div{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.sum b{font:700 34px var(--head);display:block}
+tr:target td{background:var(--gold-soft)}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="page-head">
+    <nav class="crumbs" aria-label="פירורי לחם"><a href="index.html">דף הבית</a><span>›</span><span>מפת הפלאגינים</span></nav>
+    <h1>מפת הפלאגינים והעלויות</h1>
+    <p>כל רעיון שאדונית סימנה "אהבנו", איפה הוא נמצא בהדמיה, ואיזה פלאגין של ווקומרס מבצע אותו. הבדיקה של הפלאגינים נעשתה מול wordpress.org בנובמבר 2026.</p>
+  </div>
+  <div class="sum" id="sum"></div>
+
+  <section class="sec" style="padding-top:10px">
+    <div class="sec-head"><div class="t"><h2>הרעיונות וההערות שנבחרו</h2><p>לוחצים על שם הדף כדי לראות את הרעיון בהדמיה.</p></div></div>
+    <div class="tbl"><table><thead><tr><th>הרעיון</th><th>מאיפה</th><th>איפה בהדמיה</th><th>הפלאגין</th><th>מצב</th></tr></thead><tbody id="feat"></tbody></table></div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="sec-head"><div class="t"><h2>ההערות של אדונית</h2></div></div>
+    <div class="grid g3">
+      <div class="card" style="padding:20px"><b>"עיצוב מעוגל ונעים לעין" (כרמלה)</b><p class="muted" style="margin:6px 0 0">כל ההדמיה בנויה בפינות מעוגלות וכפתורים עגולים. בפועל: תבנית Blocksy החינמית.</p></div>
+      <div class="card" style="padding:20px"><b>מועדון: 5% צבירה על תפזורת, מחובר לקומקס</b><p class="muted" style="margin:6px 0 0">הצבירה באתר: TeraWallet (חינם, לפי קטגוריה). החיבור לקופות קומקס: ספק בתשלום (Bee1 או Easy-WP). צריך לבקש מהם הדגמה ולוודא סנכרון מועדון לשני הכיוונים.</p></div>
+      <div class="card" style="padding:20px"><b>"העגלה הצפה בצד שמאל" (טבע קסטל)</b><p class="muted" style="margin:6px 0 0">כפתור העגלה צף בצד שמאל בכל דף, ונפתח כמגירה. בפועל: Side Cart WooCommerce (חינם).</p></div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="sec-head"><div class="t"><h2>כל הפלאגינים</h2><p>סה"כ הרכיבים שהאתר צריך.</p></div></div>
+    <div class="tbl"><table><thead><tr><th>פלאגין</th><th>מצב</th><th>מה חשוב לדעת</th><th>קישור</th></tr></thead><tbody id="plugs"></tbody></table></div>
+  </section>
+
+  <section class="sec" style="padding-top:0">
+    <div class="sec-head"><div class="t"><h2>לא נכנס להדמיה</h2><p>אדונית סימנה "לא בשבילנו".</p></div></div>
+    <div class="chips"><span class="chip">תרומה עם תמורה (Dear Life)</span><span class="chip">מנוי חודשי בהפתעה (אליטה אופק)</span><span class="chip">כל התבלינים מא' עד ת' (The Spice House)</span><span class="chip">שקיות מילוי (The Spice House)</span><span class="chip">מועדוני אוכל (Zingerman's)</span></div>
+  </section>
+</main>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+window.pageInit = function () {
+  const URL = {
+    theme: 'https://wordpress.org/themes/blocksy/', megamenu: 'https://wordpress.org/plugins/megamenu/', reorder: 'https://wordpress.org/plugins/repeat-order-for-woocommerce/',
+    subs: 'https://woocommerce.com/products/woocommerce-subscriptions/', wallet: 'https://wordpress.org/plugins/woo-wallet/', comax: 'https://bee1.co.il/comax-plugin-wordpress',
+    unitprice: 'https://wordpress.org/plugins/unit-price-for-woocommerce/', j5: 'https://wordpress.org/plugins/payplus-payment-gateway/', whatsapp: 'https://wordpress.org/plugins/wp-whatsapp/',
+    search: 'https://wordpress.org/plugins/ajax-search-for-woocommerce/', wishlist: 'https://wordpress.org/plugins/ti-woocommerce-wishlist/', giftcard: 'https://wordpress.org/plugins/pw-woocommerce-gift-cards/',
+    shipbar: 'https://wordpress.org/plugins/woo-free-shipping-bar/', shipcheck: '', composite: 'https://wordpress.org/plugins/wpc-composite-products/', filter: 'https://wordpress.org/plugins/woocommerce-products-filter/',
+    sidecart: 'https://wordpress.org/plugins/side-cart-woocommerce/', locator: 'https://wordpress.org/plugins/wp-store-locator/', workshops: '', recipes: 'https://wordpress.org/plugins/wp-recipe-maker/',
+    reviews: 'https://wordpress.org/plugins/widget-google-reviews/', quote: 'https://wordpress.org/plugins/yith-woocommerce-request-a-quote/', a11y: 'https://wordpress.org/plugins/pojo-accessibility/',
+    invoice: 'https://wordpress.org/plugins/wc-gateway-greeninvoice/', core: '', content: ''
+  };
+  // [idea, source, page link, page name, plugin key]
+  const F = [
+    ['"שחזור הזמנה" ו"הזמנה קבועה" בראש האתר', 'כרמלה', 'index.html', 'כותרת האתר', 'reorder'],
+    ['הזמנה קבועה', 'כרמלה', 'account.html#fixed', 'החשבון שלי', 'subs'],
+    ['מועדון לקוחות: 5% על תפזורת (לפי ההערה)', 'כרמלה', 'account.html#wallet', 'החשבון שלי', 'wallet'],
+    ['חיבור המועדון לקופות קומקס', 'הערה של אדונית', 'account.html#wallet', 'החשבון שלי', 'comax'],
+    ['"מה הכי כדאי היום?"', 'כרמלה', 'index.html', 'דף הבית', 'core'],
+    ['בחירה בין יחידות לק"ג, ומחיר ל-100 גרם', 'כרמלה', 'product.html', 'דף מוצר', 'unitprice'],
+    ['מחיר לק"ג ומחיר ל-100 גרם, זה לצד זה', 'ראס אל חנות', 'category.html?c=pure', 'כרטיס מוצר', 'unitprice'],
+    ['מתכונים שפותרים בעיה', 'כרמלה', 'recipes.html', 'מתכונים', 'recipes'],
+    ['מתכונים לפי עונה', 'The Spice House', 'recipes.html', 'מתכונים', 'recipes'],
+    ['מתכונים לפי סוג מנה', 'אליטה אופק', 'recipes.html', 'מתכונים', 'recipes'],
+    ['"בסטה עולמית"', 'כרמלה', 'category.html?m=world', 'תפריט + דף הבית', 'megamenu'],
+    ['מטבחים בתפריט הראשי', 'אליטה אופק', 'category.html?m=world', 'תפריט', 'megamenu'],
+    ['מועדפים', 'כרמלה', 'account.html#favs', 'כרטיס מוצר + חשבון', 'wishlist'],
+    ['גיפט קארד', 'כרמלה', 'account.html#giftcard', 'החשבון שלי', 'giftcard'],
+    ['הזמנה בוואטסאפ, עם שעות מענה', 'ראס אל חנות', 'index.html', 'כפתור צף', 'whatsapp'],
+    ['"מסעדות שף שקונות מאיתנו תבלינים"', 'ראס אל חנות', 'index.html', 'דף הבית', 'content'],
+    ['"טוחנים במקום" ו"קליית בוטיק" בתפריט', 'ראס אל חנות', 'category.html?c=pure', 'תפריט', 'megamenu'],
+    ['"החיוב רק אחרי הליקוט"', 'ראס אל חנות', 'product.html', 'דף מוצר + עגלה', 'j5'],
+    ['שאלות נפוצות בתפריט העליון', 'ראס אל חנות', 'help.html', 'שאלות נפוצות', 'content'],
+    ['שאלות נפוצות', 'תבלין וטבע ברכה', 'help.html', 'שאלות נפוצות', 'content'],
+    ['"הרכיבו בעצמכם"', 'Dear Life', 'gifts.html#build', 'מארזים', 'composite'],
+    ['מארזים לאירועים בחיים', 'Dear Life', 'gifts.html', 'מארזים', 'filter'],
+    ['פס משלוחים בראש הדף', 'Dear Life', 'index.html', 'ראש כל דף', 'shipbar'],
+    ['"המחלקה העסקית" בתפריט', 'Dear Life', 'business.html', 'המחלקה העסקית', 'quote'],
+    ['סיפור מקומי בדף הבית', 'Dear Life', 'index.html', 'דף הבית', 'content'],
+    ['קופסת הפתעה', 'אליטה אופק', 'gifts.html', 'מארזים', 'core'],
+    ['4 משפטי אמון מתחת לבאנר', 'אליטה אופק', 'index.html', 'דף הבית', 'content'],
+    ['הקולקציה של אדונית (מותג פרטי)', 'אליטה אופק', 'category.html?c=blends', 'תגית "מתוצרת אדונית"', 'core'],
+    ['"מוצרים כשרים" כקטגוריה', 'אליטה אופק', 'help.html#kosher', 'סינון + שאלות נפוצות', 'filter'],
+    ['כפתור "הזמנה חוזרת" בראש האתר', 'Nuts.com', 'index.html', 'כותרת האתר', 'reorder'],
+    ['6 קטגוריות ראשיות בלבד', 'Nuts.com', 'index.html', 'תפריט + דף הבית', 'megamenu'],
+    ['העונה בראש הדף', 'Nuts.com', 'index.html', 'דף הבית', 'content'],
+    ['רשת "הלהיטים" עם תמונות נקיות', 'Nuts.com', 'index.html', 'דף הבית', 'core'],
+    ['חיפושים פופולריים בשורת החיפוש', 'The Spice House', 'index.html', 'חיפוש', 'search'],
+    ['מתנות לחברות בדף הבית', 'The Spice House', 'index.html', 'דף הבית', 'content'],
+    ['טלפון הזמנות בראש האתר', 'Zingerman\'s', 'index.html', 'כותרת האתר', 'theme'],
+    ['"קנו שוב" באזור האישי', 'Zingerman\'s', 'account.html#reorder', 'החשבון שלי', 'reorder'],
+    ['חנויות ואתר במקום אחד', 'Eataly', 'branches.html', 'סניפים', 'locator'],
+    ['סדנאות ואירועים', 'Eataly', 'branches.html', 'סניפים וסדנאות', 'workshops'],
+    ['מתנות לפי סוג אדם', 'Eataly', 'gifts.html', 'מארזים', 'filter'],
+    ['אורגני וללא גלוטן בתפריט הראשי', 'Eataly', 'category.html?m=health', 'תפריט + סינון', 'filter'],
+    ['דפי מידע מקצועיים', 'תבלין וטבע ברכה', 'recipes.html', 'מתכונים ומידע', 'content'],
+    ['"תיאום ציפיות לפני רכישה"', 'תבלין וטבע ברכה', 'help.html#expect', 'שאלות נפוצות', 'content'],
+    ['בדיקת זמינות משלוח', 'באשר', 'help.html#shipping', 'שאלות נפוצות', 'shipcheck'],
+    ['אירוח למשרדים ולאירועים', 'באשר', 'business.html', 'המחלקה העסקית', 'core'],
+    ['באנרים עונתיים', 'באשר', 'index.html', 'דף הבית', 'content'],
+    ['"איך זה עובד" ו"מה יש בכל קופסה"', 'Hasod', 'gifts.html', 'מארזים', 'content'],
+    ['קטלוג מתנות לחברות', 'Hasod', 'business.html', 'המחלקה העסקית', 'content'],
+    ['"הכירו את היוצרים"', 'Hasod', 'about.html', 'הסיפור שלנו', 'content'],
+    ['תפריט עמוק ומסודר', 'טבע קסטל', 'category.html?m=spices', 'תפריט', 'megamenu'],
+    ['עגלה צפה בצד שמאל (הערה)', 'טבע קסטל', 'index.html', 'כל דף', 'sidecart'],
+    ['עיצוב מעוגל (הערה)', 'כרמלה', 'index.html', 'כל האתר', 'theme']
+  ];
+  const cnt = { free: 0, partly: 0, paid: 0 };
+  F.forEach(f => cnt[PLUGINS[f[4]][1]]++);
+  document.getElementById('sum').innerHTML = `<div><b>${F.length}</b>רעיונות והערות בהדמיה</div><div><b style="color:#2F6B34">${cnt.free}</b>עם פלאגין חינמי או ליבת ווקומרס</div><div><b style="color:#7A5B12">${cnt.partly}</b>חינמי חלקית, או צריך קוד קצר</div><div><b style="color:var(--red)">${cnt.paid}</b>דורשים פלאגין או ספק בתשלום</div>`;
+  document.getElementById('feat').innerHTML = F.map(([i, s, href, page, k]) => `<tr><td>${esc(i)}</td><td>${esc(s)}</td><td><a href="${href}">${esc(page)}</a></td><td><a href="#${k}">${esc(PLUGINS[k][0])}</a></td><td><span class="st-pill ${PLUGINS[k][1]}">${ST_LABEL[PLUGINS[k][1]]}</span></td></tr>`).join('');
+  const order = { paid: 0, partly: 1, free: 2 };
+  document.getElementById('plugs').innerHTML = Object.entries(PLUGINS).sort((a, b) => order[a[1][1]] - order[b[1][1]]).map(([k, [n, st, note]]) => `<tr id="${k}"><td><b>${esc(n)}</b></td><td><span class="st-pill ${st}">${ST_LABEL[st]}</span></td><td>${esc(note)}</td><td>${URL[k] ? `<a href="${URL[k]}" target="_blank" rel="noopener">לעמוד הפלאגין</a>` : '—'}</td></tr>`).join('');
+  if (location.hash) document.querySelector(location.hash)?.scrollIntoView();
+};
+</script>
+</body>
+</html>
