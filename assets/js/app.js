@@ -99,6 +99,9 @@
     user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>',
     phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>',
     cart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>',
+    menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>',
+    tag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="8" cy="8" r="1.6"/></svg>',
+    help: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14"/><path d="M12 17.2v.1"/></svg>',
     wa: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.8-1.1-4.6-4-4.8-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.8-1c.2-.3.4-.2.6-.1l2 .9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>'
   };
   window.ICON = ICON;
@@ -117,6 +120,7 @@
 </div></div>
 <header class="site-head">
   <div class="wrap head-row">
+    <div class="m-only m-left"><button type="button" class="ibtn" id="menu-btn" aria-label="תפריט" aria-controls="drawer" aria-expanded="false">${ICON.menu}</button><button type="button" class="ibtn" id="search-btn" aria-label="חיפוש">${ICON.search.replace('class="ico"', '')}</button></div>
     <a class="logo" href="index.html"><img src="assets/img/site/logo.png" alt=""><span><b>אדונית התבלינים</b><small>שוק קולינרי מכל העולם</small></span></a>
     <form class="search" role="search" onsubmit="event.preventDefault();location.href='category.html?q='+encodeURIComponent(this.q.value)">
       <label class="sr" for="q">חיפוש מוצר</label>
@@ -128,6 +132,7 @@
         <div class="res" id="suggest-res"></div>
       </div>
     </form>
+    <button type="button" class="m-only cart-dot" id="fcart-btn-m" aria-label="העגלה">${ICON.cart}<span class="count" id="cart-count-m">0</span></button>
     <div class="head-actions">
       <a class="hbtn icon" href="account.html" aria-label="החשבון שלי: שחזור הזמנה, הזמנה קבועה, מועדפים">${ICON.user}<span class="lbl">החשבון שלי</span></a>
       <button class="hbtn icon cart-h" type="button" id="fcart-btn-h" aria-label="העגלה">${ICON.cart}<span class="count" id="cart-count-h">0</span></button>
@@ -162,7 +167,22 @@
 <div class="wa-fab" ${/product|help/.test(location.pathname) ? '' : 'hidden'}>
   <a href="https://wa.me/972533303169" target="_blank" rel="noopener">${ICON.wa}<span>הזמנה בוואטסאפ<small>מענה א'-ה' 09:00-17:00</small></span></a>
 </div>
-<div class="toast" id="toast" role="status"></div>`;
+<div class="toast" id="toast" role="status"></div>
+<div class="drawer-scrim" id="drawer-scrim"></div>
+<nav class="drawer" id="drawer" aria-label="תפריט ראשי" aria-hidden="true">
+  <div class="drawer-head"><b>אדונית התבלינים</b><button type="button" class="x" id="drawer-x" aria-label="סגירת התפריט">×</button></div>
+  <button type="button" class="route-chip-d" data-route id="route-chip-d"></button>
+  ${MENU.map(m => `<details><summary>${esc(m.name)}</summary><a href="${m.href || 'category.html?m=' + m.id}"><b>לכל ${esc(m.name)}</b></a>${m.groups.flatMap(g => g[1]).map(k => `<a href="category.html?c=${k}">${esc(CATS[k])}</a>`).join('')}</details>`).join('')}
+  <a class="dl accent" href="category.html?c=sale">מבצעים</a>
+  <div class="drawer-links"><a href="account.html">החשבון שלי</a><a href="account.html#reorder">שחזור הזמנה</a><a href="account.html#fixed">הזמנה קבועה</a><a href="recipes.html">מתכונים</a><a href="branches.html">סניפים</a><a href="business.html">לעסקים</a><a href="help.html">שאלות נפוצות</a><a href="tel:0533303169">053-3303169</a></div>
+</nav>
+<nav class="tabbar" aria-label="ניווט מהיר">
+  <button type="button" data-open-menu>${ICON.menu}<span>כל המוצרים</span></button>
+  <a href="category.html?c=sale">${ICON.tag}<span>מבצעים</span></a>
+  <button type="button" class="tab-cart" id="fcart-btn-t" aria-label="העגלה">${ICON.cart}<span class="count" id="cart-count-t">0</span></button>
+  <a href="account.html#reorder">${ICON.redo}<span>שחזור הזמנה</span></a>
+  <a href="help.html">${ICON.help}<span>צריכים עזרה?</span></a>
+</nav>`;
   }
 
   // ---------- product card ----------
@@ -188,6 +208,26 @@
 </article>`;
   }
   window.productCard = card;
+  // ---------- colourful promo tiles (Carmella-style playful banners inside product rows) ----------
+  const PROMOS = {
+    grind: { cls: 'yellow', kicker: 'מתוצרת אדונית', title: 'טוחנים במקום, כל יום', text: 'תבלינים טהורים ותערובות מחומרים טבעיים בלבד.', cta: 'לתבלינים', href: 'category.html?c=pure', find: 'פפריקה מתוקה - 100' },
+    gifts: { cls: 'pink', kicker: 'חנוכה', title: 'מארזים מהשוק', text: 'בכל תקציב, או מרכיבים לבד.', cta: 'למארזים', href: 'gifts.html', cat: 'boxes' },
+    club: { cls: 'blue', kicker: 'המועדון', title: '5% חוזרים אליכם', text: 'על כל קנייה בתפזורת, באתר ובסניפים.', cta: 'להצטרפות', href: 'account.html#wallet', find: 'קשיו' },
+    branch: { cls: 'mint', kicker: '8 סניפים', title: 'נשלח מהסניף הכי קרוב', text: 'מהר יותר, וטרי יותר.', cta: 'בחירת עיר', route: true, find: 'פיסטוק' }
+  };
+  function promoTile(key) {
+    const p = PROMOS[key]; if (!p) return '';
+    const prod = p.cat ? (window.productsIn ? productsIn([p.cat])[0] : null) : (window.PRODUCTS || []).find(x => x.name.includes(p.find));
+    return `<article class="promo ${p.cls} reveal">
+      <span class="kicker">${esc(p.kicker)}</span>
+      <h3>${esc(p.title)}</h3>
+      <p>${esc(p.text)}</p>
+      ${p.route ? `<button type="button" class="pbtn" data-route>${esc(p.cta)} ←</button>` : `<a class="pbtn" href="${p.href}">${esc(p.cta)} ←</a>`}
+      ${prod ? `<img src="${prod.img}" alt="" loading="lazy">` : ''}
+    </article>`;
+  }
+  window.promoTile = promoTile;
+
 
   // ---------- cart ----------
   function cartTotal(c) { return Object.entries(c).reduce((s, [id, it]) => { const p = byId[id]; return p ? s + lineTotal(p, it) : s; }, 0); }
@@ -211,7 +251,8 @@
   function routeChip() {
     const el = document.getElementById('route-chip'); if (!el || !window.getRoute) return;
     const r = getRoute();
-    el.innerHTML = r ? `ההזמנה שלכם יוצאת מסניף <b>${esc(r.branch.name)}</b> · שינוי` : 'בחרו עיר, ונשלח מהסניף הכי קרוב אליכם ←';
+    const html = r ? `ההזמנה שלכם יוצאת מסניף <b>${esc(r.branch.name)}</b> · שינוי` : 'בחרו עיר, ונשלח מהסניף הכי קרוב אליכם ←';
+    el.innerHTML = html; const d = document.getElementById('route-chip-d'); if (d) d.innerHTML = html;
   }
   function routeBlock() {
     const r = window.getRoute && getRoute();
@@ -227,7 +268,7 @@
     const c = store.get('cart', {});
     const ids = Object.keys(c).filter(id => byId[id]);
     const count = ids.length;
-    document.querySelectorAll('#cart-count,#cart-count-h').forEach(el => { el.textContent = count; });
+    document.querySelectorAll('#cart-count,#cart-count-h,#cart-count-m,#cart-count-t').forEach(el => { el.textContent = count; });
     const box = document.getElementById('fcart-items'); if (!box) return;
     if (!count) box.innerHTML = '<p class="muted">העגלה ריקה. הוסיפו מוצרים מהחנות.</p>';
     else box.innerHTML = ids.map(id => {
@@ -268,6 +309,13 @@
     document.getElementById('scrim').classList.toggle('open', open);
   }
   window.openCart = openCart;
+  function openDrawer(open) {
+    const d = document.getElementById('drawer'); if (!d) return;
+    d.classList.toggle('open', open); d.setAttribute('aria-hidden', !open);
+    document.getElementById('drawer-scrim').classList.toggle('open', open);
+    document.getElementById('menu-btn')?.setAttribute('aria-expanded', open);
+  }
+  window.openDrawer = openDrawer;
 
   let tt;
   function toast(msg) { const t = document.getElementById('toast'); if (!t) return; t.textContent = msg; t.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('on'), 2200); }
@@ -310,13 +358,25 @@
       }
       const rm = e.target.closest('[data-rm]');
       if (rm) { const c = store.get('cart', {}); delete c[rm.dataset.rm]; store.set('cart', c); renderCart(); return; }
-      if (e.target.closest('#fcart-btn,#fcart-btn-h')) openCart(true);
+      if (e.target.closest('#fcart-btn,#fcart-btn-h,#fcart-btn-m,#fcart-btn-t')) openCart(true);
+      if (e.target.closest('#menu-btn,[data-open-menu]')) openDrawer(true);
+      if (e.target.closest('#drawer-x') || e.target.id === 'drawer-scrim' || e.target.closest('.drawer a')) openDrawer(false);
+      if (e.target.closest('#search-btn')) { const f = document.querySelector('.search'); f.classList.toggle('open'); if (f.classList.contains('open')) document.getElementById('q').focus(); }
       if (e.target.closest('#fcart-x') || e.target.id === 'scrim') openCart(false);
     });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') openCart(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { openCart(false); openDrawer(false); } });
     document.addEventListener('change', e => { if (e.target.name === 'how') { store.set('how', e.target.value); renderCart(); } });
     document.addEventListener('route-change', () => { routeChip(); renderCart(); });
     routeChip(); renderCart(); renderFavCount();
+    // reveal promo tiles when they scroll into view (plain scroll check, works everywhere)
+    window.watchReveal = () => {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) { document.querySelectorAll('.reveal').forEach(el => el.classList.add('in')); return; }
+      document.querySelectorAll('.reveal:not(.in)').forEach(el => { const r = el.getBoundingClientRect(); if (r.top < innerHeight * 0.92 && r.bottom > 0) el.classList.add('in'); });
+    };
+    addEventListener('scroll', () => requestAnimationFrame(window.watchReveal), { passive: true });
+    addEventListener('resize', () => window.watchReveal());
+    document.documentElement.classList.add('js-reveal');
     if (typeof window.pageInit === 'function') window.pageInit();
+    requestAnimationFrame(() => window.watchReveal());
   });
 })();

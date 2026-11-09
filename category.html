@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap">
 <link rel="icon" href="assets/img/site/logo.png">
-<link rel="stylesheet" href="assets/css/site.css?v=15">
+<link rel="stylesheet" href="assets/css/site.css?v=18">
 </head>
 <body>
 <main class="wrap">
@@ -51,9 +51,9 @@
     </div>
   </div>
 </main>
-<script src="assets/js/data.js?v=15"></script>
-<script src="assets/js/branches.js?v=15"></script>
-<script src="assets/js/app.js?v=15"></script>
+<script src="assets/js/data.js?v=18"></script>
+<script src="assets/js/branches.js?v=18"></script>
+<script src="assets/js/app.js?v=18"></script>
 <script>
 window.pageInit = function () {
   const qs = new URLSearchParams(location.search);
@@ -91,7 +91,8 @@ window.pageInit = function () {
     if (s === 'down') list.sort((a, b) => b.price - a.price);
     if (s === 'kg') list = list.filter(p => p.g).sort((a, b) => a.price / a.g - b.price / b.g);
     document.getElementById('count').textContent = list.length + ' מוצרים';
-    grid.innerHTML = list.length ? list.map(p => productCard(p)).join('') : '<p class="muted">אין מוצרים שמתאימים לסינון. נסו להסיר סינון.</p>';
+    setTimeout(() => window.watchReveal && watchReveal(), 0);
+    grid.innerHTML = list.length ? list.map((p, i) => (i === 5 ? promoTile(c === 'boxes' ? 'branch' : ['grind', 'gifts', 'branch', 'club'][list.length % 4]) : '') + productCard(p)).join('') : '<p class="muted">אין מוצרים שמתאימים לסינון. נסו להסיר סינון.</p>';
   }
   document.querySelector('.side').addEventListener('input', render);
   document.getElementById('sort').addEventListener('change', render);
