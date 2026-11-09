@@ -4,21 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>מוצר · אדונית התבלינים · הדמיה</title>
+<title>מוצר · אדונית התבלינים</title>
+<meta name="description" content="קונים במשקל באדונית התבלינים: תבלינים טחונים במקום, אגוזים ופירות יבשים. מחיר ל-100 גרם, משלוח לכל הארץ ואיסוף מ-8 סניפים.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Assistant:wght@400;600;700&display=swap">
 <link rel="icon" href="assets/img/site/logo.png">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site.css?v=5">
 <style>
 .pd{display:flex;flex-wrap:wrap;gap:36px;padding-block:20px 40px}
 .pd-img{flex:1 1 420px;min-width:0;background:#fff;border-radius:var(--r-lg);border:1px solid var(--line);aspect-ratio:1/1;max-height:560px;display:grid;place-items:center;overflow:hidden}
 .pd-img img{width:100%;height:100%;object-fit:contain}
 .pd-info{flex:1 1 400px;min-width:0;display:flex;flex-direction:column;gap:16px}
-.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
-.opt{min-height:60px;border-radius:16px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font:600 15px var(--body);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink)}
+.opt{min-height:60px;border-radius:16px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font:600 15px var(--body);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink);padding:6px}
 .opt[aria-pressed="true"]{border-color:var(--green);background:var(--green-soft)}
 .opt small{font-weight:400;color:var(--muted)}
 .note{background:var(--soft);border-radius:16px;padding:14px 16px;font-size:15px}
+.rating{display:flex;gap:8px;align-items:center;font-size:15px;color:var(--muted)}
+.rating b{color:var(--gold);letter-spacing:2px}
+@media(max-width:760px){.pd{gap:18px;padding-top:10px}.pd-img{max-height:none}#pname{font-size:26px!important}}
 </style>
 </head>
 <body>
@@ -29,84 +32,142 @@
     <div class="pd-info">
       <div class="chips" id="tags"></div>
       <h1 id="pname" style="font-size:clamp(28px,3.5vw,40px)"></h1>
+      <a class="rating" href="#reviews"><b aria-hidden="true">★★★★★</b><span>[דירוג] · [מספר] ביקורות</span></a>
+      <p id="pshort" style="margin:0;font-size:17px"></p>
       <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap"><span class="price" id="pprice" style="font-size:34px"></span><span class="unit" id="punit" style="font-size:15px"></span></div>
 
-      <div id="mode-box">
-        <b style="display:block;margin-bottom:8px">איך לקנות?</b>
-        <div class="opts" id="modes"></div>
-      </div>
       <div id="weight-box">
+        <b style="display:block;margin-bottom:8px">כמה גרם?</b>
+        <div class="presets" id="presets" role="group" aria-label="בחירת משקל"></div>
+      </div>
+      <div id="units-box">
         <b style="display:block;margin-bottom:8px">כמה?</b>
         <div class="qty"><button type="button" id="minus" aria-label="פחות">−</button><output id="qty"></output><button type="button" id="plus" aria-label="יותר">+</button></div>
       </div>
-      <div data-plug="unitprice"></div>
 
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn pri" id="add" style="flex:1 1 200px">הוספה לעגלה</button>
         <button class="btn sec" id="fixed">הוספה להזמנה הקבועה</button>
         <button class="btn sec" id="favbtn" aria-pressed="false">שמירה במועדפים</button>
       </div>
-      <div data-plug="subs,wishlist"></div>
 
-      <div class="note" id="bulk-note"><b>החיוב רק אחרי הליקוט.</b> במוצרים במשקל המחיר בעגלה הוא הערכה. אנחנו שוקלים, ומחייבים לפי המשקל האמיתי. <span data-plug="j5"></span></div>
-      <div class="note" id="club-note" style="background:var(--gold-soft)"><b>5% חוזרים לארנק המועדון</b> על המוצר הזה, כי הוא נמכר בתפזורת. <span data-plug="wallet"></span></div>
-      <div class="note"><b>משלוח:</b> עד 5 ימי עסקים. 40 ₪ עד 20 ק"ג, חינם מעל 450 ₪. <a href="help.html#shipping">בדיקת משלוח לעיר שלכם</a></div>
+      <div class="note" id="bulk-note"><b>החיוב רק אחרי הליקוט.</b> במוצרים במשקל המחיר בעגלה הוא הערכה. אנחנו שוקלים, ומחייבים לפי המשקל האמיתי.</div>
+      <div class="note" id="club-note" style="background:var(--gold-soft)"><b>5% חוזרים לארנק המועדון</b> על המוצר הזה, כי הוא נמכר בתפזורת.</div>
+      <div class="note"><b>משלוח:</b> <span id="eta"></span>. 40 ₪ עד 20 ק"ג, חינם מעל 450 ₪ (לא כולל מארזי מתנה). איסוף עצמי מ-8 סניפים. <a href="help.html#shipping">בדיקת משלוח לעיר שלכם</a></div>
     </div>
   </div>
+
+  <section class="sec" style="padding-top:0">
+    <div class="grid g2">
+      <div class="card" style="padding:22px">
+        <h2 style="font-size:22px;margin-bottom:12px">פרטי המוצר</h2>
+        <dl class="spec">
+          <div><dt>ארץ מקור</dt><dd>[ארץ מקור]</dd></div>
+          <div><dt>נטחן בתאריך</dt><dd>[תאריך טחינה]</dd></div>
+          <div><dt>רכיבים</dt><dd id="ingr">[רכיבים]</dd></div>
+          <div><dt>אלרגנים</dt><dd>[אלרגנים / "עלול להכיל"]</dd></div>
+          <div><dt>כשרות</dt><dd>[גוף הכשרות]</dd></div>
+          <div><dt>אחסון</dt><dd>במקום יבש וקריר, בכלי סגור, הרחק מאור שמש</dd></div>
+        </dl>
+      </div>
+      <div class="card" style="padding:22px">
+        <h2 style="font-size:22px;margin-bottom:12px">איך משתמשים</h2>
+        <p id="howto" style="margin:0"></p>
+        <h3 style="font-size:17px;margin:16px 0 6px">שאלות על המוצר</h3>
+        <details class="faq"><summary>כמה זמן התבלין נשאר טרי?</summary><p>[תשובה של אדונית, למשל: עד שנה בכלי סגור. הכי טעים ב-3 החודשים הראשונים אחרי הטחינה.]</p></details>
+        <details class="faq" style="margin-top:8px"><summary>אפשר לקנות כמות קטנה לניסיון?</summary><p>כן. אפשר לקנות מ-100 גרם, וגם לפי ק"ג. המחיר לפי משקל אמיתי.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="reviews" style="padding-top:0">
+    <div class="sec-head"><div class="t"><h2>ביקורות</h2><p>ביקורות של לקוחות שקנו את המוצר. אחרי כל משלוח הלקוח מקבל בקשה לדרג.</p></div></div>
+    <div class="card" style="padding:22px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between"><span class="muted">[כאן יופיעו ביקורות אמיתיות מהלקוחות]</span><button class="btn sec sm" onclick="demoToast('הדמיה: כאן כותבים ביקורת')">כתיבת ביקורת</button></div>
+  </section>
 
   <section class="sec" style="padding-top:0">
     <div class="sec-head"><div class="t"><h2>מתכון עם המוצר</h2></div></div>
     <div class="grid g3" id="recipes"></div>
   </section>
   <section class="sec" style="padding-top:0">
-    <div class="sec-head"><div class="t"><h2>קונים יחד עם המוצר</h2></div><div data-plug="core"></div></div>
+    <div class="sec-head"><div class="t"><h2>קונים יחד עם המוצר</h2></div></div>
     <div class="grid g4" id="related"></div>
   </section>
 </main>
-<script src="assets/js/data.js"></script>
-<script src="assets/js/app.js"></script>
-<script src="assets/js/recipes.js"></script>
+<div class="sticky-buy" id="sticky"><div><b id="s-price" style="font:700 20px var(--head)"></b><br><small class="muted" id="s-qty"></small></div><button class="btn pri" id="s-add">הוספה לעגלה</button></div>
+<script src="assets/js/data.js?v=5"></script>
+<script src="assets/js/app.js?v=5"></script>
+<script src="assets/js/recipes.js?v=5"></script>
 <script>
 window.pageInit = function () {
+  document.body.classList.add('has-sticky');
   const id = new URLSearchParams(location.search).get('id');
   const p = productById(id) || productsIn(['pure'])[0];
   const bulk = isBulk(p);
+  const own = p.cats.includes('pure') || p.cats.includes('blends');
   const catKey = p.cats.find(c => CATS[c] && c !== 'sale') || p.cats[0];
-  document.title = p.name + ' · אדונית התבלינים · הדמיה';
+  document.title = p.name + ' | אדונית התבלינים';
+  document.querySelector('meta[name=description]').content = `${p.name} באדונית התבלינים${own ? ', טחון במקום' : ''}. ${p.g ? money(p.price / p.g * 100) + ' ל-100 גרם. ' : ''}משלוח לכל הארץ ואיסוף מ-8 סניפים.`;
   document.getElementById('pimg').src = p.img; document.getElementById('pimg').alt = p.name;
   document.getElementById('pname').textContent = p.name;
   document.getElementById('crumb').textContent = p.name;
   const cl = document.getElementById('cat-link'); cl.textContent = CATS[catKey]; cl.href = 'category.html?c=' + catKey;
+  const base = p.name.split(/\s*-\s*|\s\d/)[0];
+  document.getElementById('pshort').textContent = own ? `${base} שאנחנו טוחנים בעצמנו בסניף, מחומרים טבעיים בלבד. קונים כמה שצריך, מ-100 גרם ועד קילו.` : `${base} מבית אדונית התבלינים.`;
+  document.getElementById('ingr').textContent = own ? base + ' (100%)' : '[רכיבים]';
+  document.getElementById('howto').textContent = own ? `מוסיפים ${base} בסוף הטיגון, כי תבלין טחון נשרף מהר. מתאים לתבשילים, לרטבים ולתיבול ירקות לפני צלייה. [טקסט מלא מאדונית]` : '[הסבר קצר מאדונית: למה המוצר טוב ואיך משתמשים בו]';
   const tags = [];
-  if (p.cats.includes('pure') || p.cats.includes('blends')) tags.push('<span class="tag green">מתוצרת אדונית · טוחנים במקום</span>');
+  if (own) tags.push('<span class="tag green">מתוצרת אדונית · טוחנים במקום</span>');
   ['organic', 'gf', 'vegan', 'keto', 'sugarfree'].forEach(k => { if (p.cats.includes(k)) tags.push(`<span class="tag">${CATS[k]}</span>`); });
   if (p.cats.includes('sale')) tags.push('<span class="tag red">מבצע</span>');
   document.getElementById('tags').innerHTML = tags.join('');
-  let mode = 'unit', q = 1;
-  const modes = document.getElementById('modes');
-  if (!bulk) { document.getElementById('mode-box').hidden = true; document.getElementById('bulk-note').hidden = true; document.getElementById('club-note').hidden = true; }
+
+  let mode = bulk ? 'g' : 'unit', q = bulk ? Math.max(100, p.g) : 1;
+  const presets = bulk ? [100, 250, 500, 1000].filter(g => g >= Math.min(p.g, 100)) : [];
+  if (!bulk) { document.getElementById('weight-box').hidden = true; document.getElementById('bulk-note').hidden = true; document.getElementById('club-note').hidden = true; }
+  else document.getElementById('units-box').hidden = true;
+  const total = () => mode === 'g' ? p.price / p.g * q : p.price * q;
   function draw() {
-    const kg = mode === 'kg';
-    const total = kg ? p.price / p.g * 1000 * q : p.price * q;
-    document.getElementById('pprice').textContent = money(total);
+    document.getElementById('pprice').textContent = money(total());
     document.getElementById('punit').innerHTML = p.g ? `${money(p.price / p.g * 100)} ל-100 גרם · ${money(p.price / p.g * 1000)} לק"ג` : '';
-    document.getElementById('qty').textContent = kg ? q + ' ק"ג' : q + ' יח\'';
-    if (bulk) modes.innerHTML = [['unit', 'יחידות', `אריזה של ${p.g >= 1000 ? p.g / 1000 + ' ק"ג' : p.g + ' גרם'}`], ['kg', 'לפי ק"ג', 'שוקלים בשבילכם']].map(([k, t, s]) => `<button type="button" class="opt" data-m="${k}" aria-pressed="${k === mode}">${t}<small>${s}</small></button>`).join('');
+    document.getElementById('qty').textContent = q + ' יח\'';
+    document.getElementById('presets').innerHTML = presets.map(g => `<button type="button" class="opt" data-g="${g}" aria-pressed="${mode === 'g' && q === g}">${g >= 1000 ? g / 1000 + ' ק"ג' : g + ' גרם'}<small>${money(p.price / p.g * g)}</small></button>`).join('');
+    document.getElementById('s-price').textContent = money(total());
+    document.getElementById('s-qty').textContent = qtyLabel({ mode, q });
   }
-  modes.addEventListener('click', e => { const b = e.target.closest('[data-m]'); if (!b) return; mode = b.dataset.m; q = mode === 'kg' ? 0.25 : 1; draw(); });
-  document.getElementById('plus').onclick = () => { q = +(q + (mode === 'kg' ? 0.25 : 1)).toFixed(2); draw(); };
-  document.getElementById('minus').onclick = () => { q = Math.max(mode === 'kg' ? 0.25 : 1, +(q - (mode === 'kg' ? 0.25 : 1)).toFixed(2)); draw(); };
-  document.getElementById('add').onclick = () => addToCart(p.id, mode, q);
+  document.getElementById('presets').addEventListener('click', e => { const b = e.target.closest('[data-g]'); if (b) { q = +b.dataset.g; draw(); } });
+  document.getElementById('plus').onclick = () => { q++; draw(); };
+  document.getElementById('minus').onclick = () => { q = Math.max(1, q - 1); draw(); };
+  document.getElementById('add').onclick = document.getElementById('s-add').onclick = () => addToCart(p.id, mode, q);
   document.getElementById('fixed').onclick = () => { const f = demoStore.get('fixed', []); if (!f.includes(p.id)) f.push(p.id); demoStore.set('fixed', f); demoToast('נוסף להזמנה הקבועה'); };
   const fb = document.getElementById('favbtn');
   const syncFav = () => { const on = demoStore.get('favs', []).includes(p.id); fb.setAttribute('aria-pressed', on); fb.textContent = on ? 'שמור במועדפים ✓' : 'שמירה במועדפים'; };
   fb.onclick = () => { let f = demoStore.get('favs', []); f = f.includes(p.id) ? f.filter(x => x !== p.id) : f.concat(p.id); demoStore.set('favs', f); syncFav(); renderFavCount(); };
   syncFav(); draw();
-  const word = p.name.split(/[\s-]/)[0];
+  const d = new Date(); let k = 0; const end = new Date(d); while (k < 5) { end.setDate(end.getDate() + 1); if (end.getDay() < 5) k++; }
+  document.getElementById('eta').textContent = 'יגיע עד ' + end.toLocaleDateString('he-IL', { weekday: 'long', day: 'numeric', month: 'numeric' });
   let rs = RECIPES.filter(r => r.find.some(w => p.name.includes(w)));
   if (!rs.length) rs = RECIPES.slice(3, 4);
   document.getElementById('recipes').innerHTML = rs.slice(0, 3).map(recipeCard).join('');
-  document.getElementById('related').innerHTML = productsIn([catKey]).filter(x => x.id !== p.id).slice(0, 4).map(x => productCard(x)).join('');
+  document.getElementById('related').innerHTML = productsIn([catKey]).filter(x => x.id !== p.id && x.name.split(' ')[0] !== p.name.split(' ')[0]).slice(0, 4).map(x => productCard(x)).join('');
+
+  // Structured data (blueprint for the WooCommerce site: Rank Math/Yoast + a unit-price snippet)
+  const url = location.href.split('#')[0];
+  addJsonLd({
+    '@context': 'https://schema.org', '@type': 'Product', name: p.name, image: new URL(p.img, location.href).href, sku: p.id,
+    brand: { '@type': 'Brand', name: own ? 'אדונית התבלינים' : undefined },
+    category: CATS[catKey],
+    offers: {
+      '@type': 'Offer', url, priceCurrency: 'ILS', price: p.price, availability: 'https://schema.org/InStock',
+      seller: { '@type': 'Organization', name: 'אדונית התבלינים' },
+      priceSpecification: p.g ? { '@type': 'UnitPriceSpecification', price: +(p.price / p.g * 100).toFixed(2), priceCurrency: 'ILS', referenceQuantity: { '@type': 'QuantitativeValue', value: 100, unitCode: 'GRM' } } : undefined,
+      shippingDetails: { '@type': 'OfferShippingDetails', shippingRate: { '@type': 'MonetaryAmount', value: 40, currency: 'ILS' }, shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'IL' }, deliveryTime: { '@type': 'ShippingDeliveryTime', transitTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 5, unitCode: 'DAY' } } }
+    }
+  });
+  addJsonLd({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'דף הבית', item: new URL('index.html', location.href).href },
+    { '@type': 'ListItem', position: 2, name: CATS[catKey], item: new URL('category.html?c=' + catKey, location.href).href },
+    { '@type': 'ListItem', position: 3, name: p.name } ] });
 };
 </script>
 </body>

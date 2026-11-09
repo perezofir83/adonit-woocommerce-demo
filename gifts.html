@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>מארזים ומתנות · אדונית התבלינים · הדמיה</title>
+<title>מארזים ומתנות | אדונית התבלינים</title>
+<meta name="description" content="מארזי מתנה מאדונית התבלינים: לפי תקציב, לפי אירוע ולפי מי שמקבל, או מארז שמרכיבים לבד. משלוח לכל הארץ.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Assistant:wght@400;600;700&display=swap">
 <link rel="icon" href="assets/img/site/logo.png">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site.css?v=5">
 <style>
 .box-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column}
 .box-card img{aspect-ratio:1/1;object-fit:cover;width:100%}
@@ -31,6 +32,7 @@
     <nav class="crumbs" aria-label="פירורי לחם"><a href="index.html">דף הבית</a><span>›</span><span>מארזים ומתנות</span></nav>
     <h1>מארזים ומתנות</h1>
     <p>מתנות הן עולם ומלואו. אצלנו באדונית אפשר להרכיב מארזים לכל מטרה, חשק וקונספט, ובכל תקציב.</p>
+    <p style="background:var(--gold-soft);color:var(--brown);border-radius:14px;padding:10px 14px;font-weight:600;display:inline-block">חנוכה: מזמינים עד [תאריך] ומקבלים לפני החג. ברכה אישית בלי עלות.</p>
   </div>
 
   <section class="sec" style="padding-top:10px">
@@ -38,36 +40,33 @@
       <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b style="min-width:70px">תקציב</b><div class="chips" id="f-b"></div></div>
       <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b style="min-width:70px">אירוע</b><div class="chips" id="f-o"></div></div>
       <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><b style="min-width:70px">למי</b><div class="chips" id="f-p"></div></div>
-      <div data-plug="filter"></div>
     </div>
     <p class="muted" id="count" style="margin:14px 0"></p>
     <div class="grid g4" id="boxes"></div>
   </section>
 
   <section class="sec" style="padding-top:0">
-    <div class="sec-head"><div class="t"><h2>מארזים לרגעים בחיים</h2><p>לא רק לחגים. מארזים לאירועים אישיים.</p></div><div data-plug="core,filter"></div></div>
+    <div class="sec-head"><div class="t"><h2>מארזים לרגעים בחיים</h2><p>לא רק לחגים. מארזים לאירועים אישיים.</p></div></div>
     <div class="grid g3">
-      <div class="card" style="padding:22px;display:flex;flex-direction:column;gap:8px"><span class="tag">רעיון חדש</span><h3>מארזי יום הולדת</h3><p class="muted" style="margin:0">קולקציה קבועה לימי הולדת. צריך להרכיב מארזים ולצלם.</p></div>
-      <div class="card" style="padding:22px;display:flex;flex-direction:column;gap:8px"><span class="tag">רעיון חדש</span><h3>מארז ליולדת</h3><p class="muted" style="margin:0">פינוק להורים הטריים: חליטות, פירות יבשים ומתוקים.</p></div>
-      <div class="card" style="padding:22px;display:flex;flex-direction:column;gap:8px"><span class="tag">רעיון חדש</span><h3>מארז חנוכת בית</h3><p class="muted" style="margin:0">תבלינים בסיסיים, שמן זית וכלי מטבח לבית החדש.</p></div>
+      <div class="card" style="padding:22px;display:flex;flex-direction:column;gap:8px"><h3>מארזי יום הולדת</h3><p class="muted" style="margin:0">קולקציה קבועה לימי הולדת. צריך להרכיב מארזים ולצלם.</p></div>
+      <div class="card" style="padding:22px;display:flex;flex-direction:column;gap:8px"><h3>מארז ליולדת</h3><p class="muted" style="margin:0">פינוק להורים הטריים: חליטות, פירות יבשים ומתוקים.</p></div>
+      <div class="card" style="padding:22px;display:flex;flex-direction:column;gap:8px"><h3>מארז חנוכת בית</h3><p class="muted" style="margin:0">תבלינים בסיסיים, שמן זית וכלי מטבח לבית החדש.</p></div>
     </div>
   </section>
 
   <section class="sec" style="padding-top:0">
     <div class="card" style="padding:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px;align-items:center;background:var(--brown);color:#fff;border:0">
       <div style="display:flex;flex-direction:column;gap:10px">
-        <span class="tag" style="align-self:flex-start">רעיון חדש</span>
         <h2 style="font-size:34px">קופסת ההפתעה של אדונית</h2>
         <p style="margin:0;color:#EADFD2">קופסה במחיר קבוע עם מוצרים שאנחנו בוחרים: תבלין חדש, משהו מתוק ומשהו מהבסטה העולמית. כיף לקנות וכיף לתת.</p>
         <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span class="price" style="color:var(--yellow)">[מחיר קבוע]</span><button class="btn gold" onclick="demoToast('הדמיה: קופסת ההפתעה נוספה לעגלה')">לקופסת ההפתעה</button></div>
-        <div data-plug="core"></div>
       </div>
       <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px" id="mystery"></div>
     </div>
   </section>
 
   <section class="sec" id="build" style="padding-top:0">
-    <div class="sec-head"><div class="t"><h2>הרכיבו מארז בעצמכם</h2><p>בוחרים גודל, ממלאים במוצרים שאוהבים, ואנחנו אורזים ושולחים.</p></div><div data-plug="composite"></div></div>
+    <div class="sec-head"><div class="t"><h2>הרכיבו מארז בעצמכם</h2><p>בוחרים גודל, ממלאים במוצרים שאוהבים, ואנחנו אורזים ושולחים.</p></div></div>
     <div class="with-side">
       <aside class="side" style="position:sticky;top:12px">
         <h4>1. גודל המארז</h4>
@@ -87,7 +86,7 @@
   </section>
 
   <section class="sec" style="padding-top:0">
-    <div class="sec-head"><div class="t"><h2>איך זה עובד</h2></div><div data-plug="content"></div></div>
+    <div class="sec-head"><div class="t"><h2>איך זה עובד</h2></div></div>
     <div class="steps">
       <div><b>בוחרים מארז</b>מארז מוכן, או מרכיבים לבד.</div>
       <div><b>כותבים ברכה</b>ברכה אישית בכרטיס, בלי עלות.</div>
@@ -97,8 +96,8 @@
     <p style="margin-top:16px"><a href="business.html"><b>מזמינים לעובדים או ללקוחות? למחלקה העסקית ←</b></a></p>
   </section>
 </main>
-<script src="assets/js/data.js"></script>
-<script src="assets/js/app.js"></script>
+<script src="assets/js/data.js?v=5"></script>
+<script src="assets/js/app.js?v=5"></script>
 <script>
 window.pageInit = function () {
   const meta = {

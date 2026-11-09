@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>החשבון שלי · אדונית התבלינים · הדמיה</title>
+<title>החשבון שלי | אדונית התבלינים</title>
+<meta name="description" content="האזור האישי באדונית התבלינים.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Assistant:wght@400;600;700&display=swap">
 <link rel="icon" href="assets/img/site/logo.png">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site.css?v=5">
 <style>
 .acc-nav{display:flex;flex-direction:column;gap:4px}
 .acc-nav a{padding:10px 12px;border-radius:12px;text-decoration:none;font-weight:600}
@@ -25,7 +26,7 @@
 <main class="wrap">
   <div class="page-head">
     <h1>שלום, [שם הלקוח]</h1>
-    <p>האזור האישי. כל הנתונים בעמוד הזה הם דוגמה להדמיה.</p>
+    <p>ההזמנות, הארנק והמועדפים שלכם במקום אחד.</p>
   </div>
   <div class="with-side" style="margin-top:16px">
     <aside class="side"><nav class="acc-nav" aria-label="החשבון שלי">
@@ -34,12 +35,12 @@
     <div class="main-col" style="display:flex;flex-direction:column;gap:18px">
 
       <section class="panel" id="reorder">
-        <div class="sec-head" style="margin:0"><div class="t"><h2>שחזור הזמנה</h2><p>לוחצים, וכל ההזמנה חוזרת לעגלה.</p></div><div data-plug="reorder,core"></div></div>
+        <div class="sec-head" style="margin:0"><div class="t"><h2>שחזור הזמנה</h2><p>לוחצים, וכל ההזמנה חוזרת לעגלה.</p></div></div>
         <div id="orders" style="display:flex;flex-direction:column;gap:10px"></div>
       </section>
 
       <section class="panel" id="fixed">
-        <div class="sec-head" style="margin:0"><div class="t"><h2>הזמנה קבועה</h2><p>הסל הקבוע שלכם מגיע אוטומטית. משנים, דוחים או עוצרים מתי שרוצים.</p></div><div data-plug="subs"></div></div>
+        <div class="sec-head" style="margin:0"><div class="t"><h2>הזמנה קבועה</h2><p>הסל הקבוע שלכם מגיע אוטומטית. משנים, דוחים או עוצרים מתי שרוצים.</p></div></div>
         <div class="grid g3">
           <label class="field">כל כמה זמן<select><option>כל שבוע</option><option selected>כל שבועיים</option><option>כל חודש</option></select></label>
           <label class="field">יום משלוח<select><option>שלישי</option><option>חמישי</option></select></label>
@@ -50,19 +51,19 @@
       </section>
 
       <section class="panel" id="wallet">
-        <div class="sec-head" style="margin:0"><div class="t"><h2>הארנק והמועדון</h2><p>5% חוזרים לארנק על כל קנייה של מוצרים בתפזורת, באתר ובסניפים.</p></div><div data-plug="wallet,comax"></div></div>
+        <div class="sec-head" style="margin:0"><div class="t"><h2>הארנק והמועדון</h2><p>5% חוזרים לארנק על כל קנייה של מוצרים בתפזורת, באתר ובסניפים.</p></div></div>
         <div class="wallet"><div><span>יתרה בארנק</span><div class="big">[יתרה] ₪</div></div><div style="max-width:420px">מממשים באתר ובכל 8 הסניפים. הקופות בסניפים והאתר מחוברים, כי המועדון מסונכרן עם קומקס.</div></div>
         <div class="tbl"><table><thead><tr><th>תאריך</th><th>איפה</th><th>קנייה בתפזורת</th><th>חזר לארנק</th></tr></thead>
           <tbody><tr><td>[תאריך]</td><td>אתר</td><td>[סכום]</td><td>5%</td></tr><tr><td>[תאריך]</td><td>סניף רעננה</td><td>[סכום]</td><td>5%</td></tr></tbody></table></div>
       </section>
 
       <section class="panel" id="favs">
-        <div class="sec-head" style="margin:0"><div class="t"><h2>המועדפים שלי</h2><p>מוצרים ששמרתם בלב.</p></div><div data-plug="wishlist"></div></div>
+        <div class="sec-head" style="margin:0"><div class="t"><h2>המועדפים שלי</h2><p>מוצרים ששמרתם בלב.</p></div></div>
         <div class="grid g4" id="fav-list"></div>
       </section>
 
       <section class="panel" id="giftcard">
-        <div class="sec-head" style="margin:0"><div class="t"><h2>גיפט קארד</h2><p>כרטיס מתנה דיגיטלי, לשימוש באתר.</p></div><div data-plug="giftcard"></div></div>
+        <div class="sec-head" style="margin:0"><div class="t"><h2>גיפט קארד</h2><p>כרטיס מתנה דיגיטלי, לשימוש באתר.</p></div></div>
         <div class="chips"><button class="chip" aria-pressed="false">100 ₪</button><button class="chip" aria-pressed="true">200 ₪</button><button class="chip" aria-pressed="false">300 ₪</button><button class="chip" aria-pressed="false">סכום אחר</button></div>
         <div class="grid g2"><label class="field">למי<input placeholder="שם המקבל"></label><label class="field">ברכה<input placeholder="מזל טוב!"></label></div>
         <button class="btn pri" style="align-self:flex-start" onclick="demoToast('הדמיה: הגיפט קארד נוסף לעגלה')">הוספה לעגלה</button>
@@ -70,8 +71,8 @@
     </div>
   </div>
 </main>
-<script src="assets/js/data.js"></script>
-<script src="assets/js/app.js"></script>
+<script src="assets/js/data.js?v=5"></script>
+<script src="assets/js/app.js?v=5"></script>
 <script>
 window.pageInit = function () {
   const sample = [

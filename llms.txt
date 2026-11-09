@@ -1,0 +1,29 @@
+# אדונית התבלינים (Adonit Hatavlinim)
+
+> Israeli spice and deli chain founded in Pardes Hanna. Spices and spice blends ground in-store, nuts, dried fruit, coffee, deli and gift boxes. 8 branches and delivery across Israel.
+> This file is a template for the live site (www.adonithatavlinim.co.il). The demo itself is not indexed.
+
+## Shop
+- [Spices ground in-store](https://www.adonithatavlinim.co.il/spices/): pure spices and Adonit's own blends, sold from 100 g to 1 kg
+- [Nuts and dried fruit](https://www.adonithatavlinim.co.il/nuts-dried-fruit/): natural, roasted in-store, sold by weight
+- [World pantry](https://www.adonithatavlinim.co.il/world/): Indian, Italian, Asian and Mexican products
+- [Gift boxes](https://www.adonithatavlinim.co.il/gifts/): by budget (up to 150, 250, 350 ILS), by occasion, or build your own
+- [Business department](https://www.adonithatavlinim.co.il/business/): office supply, corporate gifts, spices for restaurants
+
+## Store facts
+- Shipping: up to 5 business days, 40 ILS up to 20 kg (Eilat, Arava, Dead Sea: 55 ILS). Free over 450 ILS, gift boxes excluded.
+- Pickup: free, from any of the 8 branches.
+- Weighed products: the card is charged after picking, by real weight.
+- Customer club: 5% back to the wallet on bulk products, online and in branches.
+
+## Branches
+- [All branches and opening hours](https://www.adonithatavlinim.co.il/branches/): Pardes Hanna (HaHaruvim 7), Ra'anana, M HaDerech (Beit Herut), Kfar Yona, Rosh HaAyin, Afula, Kiryat Ono, Tel Aviv
+
+## Help
+- [FAQ: shipping, returns, kosher](https://www.adonithatavlinim.co.il/faq/)
+- [Recipes and spice guides](https://www.adonithatavlinim.co.il/recipes/)
+
+## Contact
+- Customer service: +972-53-330-3169, Sun-Thu 09:00-17:00
+- Business: +972-53-301-3043
+- Email: adonitoffice@gmail.com

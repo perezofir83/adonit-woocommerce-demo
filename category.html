@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>קטגוריה · אדונית התבלינים · הדמיה</title>
+<title>קטגוריה | אדונית התבלינים</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Assistant:wght@400;600;700&display=swap">
 <link rel="icon" href="assets/img/site/logo.png">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site.css?v=5">
 </head>
 <body>
 <main class="wrap">
@@ -20,7 +20,8 @@
   <div class="chips" id="subcats" style="margin:12px 0 22px"></div>
   <div class="with-side">
     <aside class="side" aria-label="סינון">
-      <div><h4>סינון</h4><div data-plug="filter"></div></div>
+      <details class="filters" id="filters" open><summary>סינון ומיון</summary>
+      <div style="display:flex;flex-direction:column;gap:16px">
       <div><h4>לפי צורך</h4>
         <label><input type="checkbox" data-need="gf"> ללא גלוטן</label>
         <label><input type="checkbox" data-need="organic"> אורגני</label>
@@ -36,22 +37,22 @@
       </div>
       <div class="card" style="padding:14px;background:var(--green-soft);border:0;font-size:14.5px">
         <b>קונים במשקל?</b><br>בוחרים "לפי ק"ג" בכרטיס. המחיר הוא הערכה, והחיוב הסופי רק אחרי הליקוט.
-        <div data-plug="unitprice,j5" style="margin-top:8px"></div>
       </div>
+      </div></details>
     </aside>
     <div class="main-col">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px">
         <span class="muted" id="count"></span>
         <label class="field" style="flex-direction:row;align-items:center;gap:8px">מיון
-          <select id="sort" style="min-height:40px"><option value="">מומלץ</option><option value="up">מחיר: מהנמוך</option><option value="down">מחיר: מהגבוה</option><option value="kg">מחיר לק"ג</option></select>
+          <select id="sort" style="min-height:40px"><option value="">הכי נמכרים</option><option value="up">מחיר: מהנמוך</option><option value="down">מחיר: מהגבוה</option><option value="kg">מחיר לק"ג</option></select>
         </label>
       </div>
       <div class="grid g4" id="grid"></div>
     </div>
   </div>
 </main>
-<script src="assets/js/data.js"></script>
-<script src="assets/js/app.js"></script>
+<script src="assets/js/data.js?v=5"></script>
+<script src="assets/js/app.js?v=5"></script>
 <script>
 window.pageInit = function () {
   const qs = new URLSearchParams(location.search);
@@ -67,7 +68,14 @@ window.pageInit = function () {
   document.getElementById('title').textContent = title;
   document.getElementById('crumb').textContent = title;
   document.getElementById('sub').textContent = sub;
-  document.title = title + ' · אדונית התבלינים · הדמיה';
+  document.title = title + ' | אדונית התבלינים';
+  if (!sub && title) sub = `${title} באדונית התבלינים: קונים במשקל או באריזה, עם משלוח לכל הארץ ואיסוף מ-8 סניפים.`;
+  document.getElementById('sub').textContent = sub;
+  const md = document.createElement('meta'); md.name = 'description'; md.content = sub; document.head.appendChild(md);
+  if (matchMedia('(max-width:760px)').matches) document.getElementById('filters').removeAttribute('open');
+  addJsonLd({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'דף הבית', item: new URL('index.html', location.href).href },
+    { '@type': 'ListItem', position: 2, name: title } ] });
   document.getElementById('subcats').innerHTML = subcats.map(k => `<a class="chip ${k === c ? 'on' : ''}" href="category.html?c=${k}">${esc(CATS[k])}</a>`).join('');
   const base = q ? PRODUCTS.filter(p => p.name.includes(q)) : productsIn(keys);
   const grid = document.getElementById('grid');
@@ -81,7 +89,7 @@ window.pageInit = function () {
     if (s === 'up') list.sort((a, b) => a.price - b.price);
     if (s === 'down') list.sort((a, b) => b.price - a.price);
     if (s === 'kg') list = list.filter(p => p.g).sort((a, b) => a.price / a.g - b.price / b.g);
-    document.getElementById('count').textContent = list.length + ' מוצרים (בהדמיה מוצג חלק מהקטלוג)';
+    document.getElementById('count').textContent = list.length + ' מוצרים';
     grid.innerHTML = list.length ? list.map(p => productCard(p)).join('') : '<p class="muted">אין מוצרים שמתאימים לסינון. נסו להסיר סינון.</p>';
   }
   document.querySelector('.side').addEventListener('input', render);
