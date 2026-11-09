@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Assistant:wght@400;600;700&display=swap">
 <link rel="icon" href="assets/img/site/logo.png">
-<link rel="stylesheet" href="assets/css/site.css?v=5">
+<link rel="stylesheet" href="assets/css/site.css?v=7">
 </head>
 <body>
 <main>
@@ -22,7 +22,7 @@
     <div class="trust" aria-label="למה אדונית">
       <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16v13H4zM8 7V4h8v3"/></svg><p style="margin:0"><b>יותר מ-1,900 מוצרים</b><span>מכל העולם</span></p></div>
       <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><p style="margin:0"><b>טוחנים במקום</b><span>תבלינים ותערובות בייצור עצמי</span></p></div>
-      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><p style="margin:0"><b>8 סניפים</b><span>איסוף עצמי ללא עלות</span></p></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><p style="margin:0"><b>8 סניפים</b><span>ההזמנה יוצאת מהסניף הקרוב</span></p></div>
       <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 7h12v9H2zM14 10h4l4 3v3h-8z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg><p style="margin:0"><b>משלוח לכל הארץ</b><span>חינם מעל 450 ₪</span></p></div>
     </div>
   </div>
@@ -144,8 +144,9 @@
     <div class="chips" id="branch-chips"></div>
   </div></section>
 </main>
-<script src="assets/js/data.js?v=5"></script>
-<script src="assets/js/app.js?v=5"></script>
+<script src="assets/js/data.js?v=7"></script>
+<script src="assets/js/branches.js?v=7"></script>
+<script src="assets/js/app.js?v=7"></script>
 <script>
 window.pageInit = function () {
   addJsonLd({ '@context': 'https://schema.org', '@graph': [
@@ -186,6 +187,6 @@ window.pageInit = function () {
   document.getElementById('branch-chips').innerHTML = ['פרדס חנה', 'רעננה', 'M הדרך', 'כפר יונה', 'ראש העין', 'עפולה', 'קריית אונו', 'תל אביב'].map(b => `<a class="chip" href="branches.html">${b}</a>`).join('');
 };
 </script>
-<script src="assets/js/recipes.js?v=5"></script>
+<script src="assets/js/recipes.js?v=7"></script>
 </body>
 </html>

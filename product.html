@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Assistant:wght@400;600;700&display=swap">
 <link rel="icon" href="assets/img/site/logo.png">
-<link rel="stylesheet" href="assets/css/site.css?v=5">
+<link rel="stylesheet" href="assets/css/site.css?v=7">
 <style>
 .pd{display:flex;flex-wrap:wrap;gap:36px;padding-block:20px 40px}
 .pd-img{flex:1 1 420px;min-width:0;background:#fff;border-radius:var(--r-lg);border:1px solid var(--line);aspect-ratio:1/1;max-height:560px;display:grid;place-items:center;overflow:hidden}
@@ -95,9 +95,10 @@
   </section>
 </main>
 <div class="sticky-buy" id="sticky"><div><b id="s-price" style="font:700 20px var(--head)"></b><br><small class="muted" id="s-qty"></small></div><button class="btn pri" id="s-add">הוספה לעגלה</button></div>
-<script src="assets/js/data.js?v=5"></script>
-<script src="assets/js/app.js?v=5"></script>
-<script src="assets/js/recipes.js?v=5"></script>
+<script src="assets/js/data.js?v=7"></script>
+<script src="assets/js/branches.js?v=7"></script>
+<script src="assets/js/app.js?v=7"></script>
+<script src="assets/js/recipes.js?v=7"></script>
 <script>
 window.pageInit = function () {
   document.body.classList.add('has-sticky');
@@ -144,8 +145,13 @@ window.pageInit = function () {
   const syncFav = () => { const on = demoStore.get('favs', []).includes(p.id); fb.setAttribute('aria-pressed', on); fb.textContent = on ? 'שמור במועדפים ✓' : 'שמירה במועדפים'; };
   fb.onclick = () => { let f = demoStore.get('favs', []); f = f.includes(p.id) ? f.filter(x => x !== p.id) : f.concat(p.id); demoStore.set('favs', f); syncFav(); renderFavCount(); };
   syncFav(); draw();
-  const d = new Date(); let k = 0; const end = new Date(d); while (k < 5) { end.setDate(end.getDate() + 1); if (end.getDay() < 5) k++; }
-  document.getElementById('eta').textContent = 'יגיע עד ' + end.toLocaleDateString('he-IL', { weekday: 'long', day: 'numeric', month: 'numeric' });
+  const eta = () => {
+    const r = getRoute();
+    document.getElementById('eta').innerHTML = r
+      ? `במלאי בסניף ${esc(r.branch.name)}. ${esc(deliveryEstimate())} · <button type="button" class="linkbtn" data-route>שינוי סניף</button>`
+      : `${esc(deliveryEstimate())} · <button type="button" class="linkbtn" data-route>בחרו עיר לזמן מדויק</button>`;
+  };
+  eta(); document.addEventListener('route-change', eta);
   let rs = RECIPES.filter(r => r.find.some(w => p.name.includes(w)));
   if (!rs.length) rs = RECIPES.slice(3, 4);
   document.getElementById('recipes').innerHTML = rs.slice(0, 3).map(recipeCard).join('');

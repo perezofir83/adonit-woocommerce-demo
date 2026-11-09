@@ -247,6 +247,21 @@ details.faq p{margin:0 0 16px;color:var(--muted)}
 .presets{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
 .sticky-buy{display:none}
 details.filters>summary{display:none;list-style:none}
+.route-chip{background:rgba(255,255,255,.12);color:#F7EFE3;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:4px 14px;font:500 14px var(--body);cursor:pointer;min-height:32px}
+.route-chip b{color:var(--yellow)}
+.route-chip:hover{background:rgba(255,255,255,.2)}
+.route-dlg{border:0;border-radius:var(--r-lg);padding:0;width:min(480px,calc(100vw - 32px));box-shadow:0 20px 60px rgba(0,0,0,.25);color:var(--ink)}
+.route-dlg::backdrop{background:rgba(30,20,15,.45)}
+.route-box{padding:26px;display:flex;flex-direction:column;gap:14px;position:relative;direction:rtl}
+.route-box .x{position:absolute;top:14px;left:14px;width:40px;height:40px;border-radius:50%;border:0;background:var(--soft);font-size:20px;cursor:pointer}
+.route-card{background:var(--green-soft);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.route-card .tag{align-self:flex-start}
+.route-mini{background:var(--green-soft);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;font-size:14.5px}
+.route-mini .btn{align-self:flex-start}
+.how{display:flex;flex-direction:column;gap:4px}
+.how label{display:flex;gap:8px;align-items:center;cursor:pointer}
+.how input{accent-color:var(--green);width:18px;height:18px}
+.linkbtn{border:0;background:none;color:var(--green-dk);text-decoration:underline;cursor:pointer;font:inherit;padding:0}
 .rating-bar{display:block;text-align:center;margin-top:10px;font-weight:600;color:var(--brown);text-decoration:none;font-size:15px}
 .home-h1{font-size:clamp(20px,2.4vw,26px);margin:18px 0 0;color:var(--brown);font-weight:600}
 .spec{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;font-size:15px;margin:0}
@@ -263,6 +278,7 @@ details.filters>summary{display:none;list-style:none}
   .hbtn.cart-h{display:none}
   body{font-size:16px}
   .ship-bar .more{display:none}
+  .route-chip{font-size:13px;padding:3px 12px}
   .ship-bar .wrap{padding-block:6px}
   .head-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding-block:10px}
   .logo img{width:42px;height:42px}

@@ -12,7 +12,11 @@
     reorder:   ['Repeat Order for WooCommerce', 'partly', 'כפתור "הזמנה חוזרת" באזור האישי. הכפתור בראש האתר דורש קוד קצר.'],
     subs:      ['WooCommerce Subscriptions', 'paid', 'כ-279$ לשנה. התוסף החינמי (WP Swings) מחייב רק דרך Stripe או PayPal, לא דרך סליקה ישראלית.'],
     wallet:    ['TeraWallet', 'free', 'ארנק דיגיטלי עם החזר כספי לפי קטגוריה. מתאים ל-5% על מוצרים בתפזורת.'],
-    comax:     ['חיבור לקומקס (Bee1 / Easy-WP)', 'paid', 'ספק ישראלי, מחיר לפי הצעה. מסנכרן מלאי, הזמנות ומבצעים עם הקופות. צריך לוודא סנכרון מועדון.'],
+    comax:     ['חיבור לקומקס (Easy-WP או פיתוח)', 'paid', 'Easy-WP: כ-2,500 ₪, מעביר קטלוג ומלאי מקומקס לאתר בלבד. מלאי לפי סניף, שליחת הזמנה לסניף וסנכרון מועדון: לא מאומת. צריך לשאול את קומקס.'],
+    multiloca: ['MultiLoca (Techspawn)', 'paid', 'כ-99$ חד-פעמי. ניתוב אוטומטי לסניף הכי קרוב לכתובת, מלאי לכל סניף, מייל למנהל הסניף, וכל סניף רואה רק את ההזמנות שלו. פיצול הזמנה: תוסף נוסף בתשלום.'],
+    zones:     ['אזור משלוח לכל סניף + מייל לסניף', 'free', 'אזור משלוח לכל סניף לפי רשימת ערים ומיקודים. מייל ההזמנה נשלח לסניף לפי האזור: קוד קצר של כ-20 שורות, או Smart Email Recipients (כ-99$).'],
+    pickup:    ['איסוף מקומי (ליבה)', 'free', 'בלוק האיסוף של ווקומרס תומך ב-8 נקודות איסוף. דורש את הקופה החדשה. צריך לבדוק שתוסף הסליקה תומך בה.'],
+    slots:     ['Order Delivery Date Pro', 'paid', 'כ-119$ לשנה. חלונות זמן ושעת סגירה לכל אזור, משלוח באותו יום, ומגבלת הזמנות.'],
     unitprice: ['Unit Price for WooCommerce', 'partly', 'מכירה בגרמים וק"ג ומחיר ל-100 גרם. הצגה של מחיר לק"ג ולצדו מחיר ל-100 גרם דורשת קוד קצר.'],
     j5:        ['PayPlus (סליקה)', 'free', 'התוסף חינמי. תומך ב-J5 עם "הערכת משקל": החיוב הסופי אחרי הליקוט. חשבון הסליקה בתשלום.'],
     whatsapp:  ['WP Chat App', 'partly', 'כפתור וואטסאפ חינמי. שעות מענה אוטומטיות רק בגרסת PRO (כ-20-50$).'],
@@ -107,9 +111,8 @@
     }).join('');
     return `
 <div class="ship-bar" id="shipbar"><div class="wrap">
-  <span><strong>משלוח חינם</strong> בהזמנה מעל 450 ₪ (לא כולל מארזי מתנה)</span>
-  <span class="more">משלוח עד 5 ימי עסקים, א'-ה'</span>
-  <span class="more">איסוף עצמי מ-8 סניפים</span>
+  <span class="more"><strong>משלוח חינם</strong> בהזמנה מעל 450 ₪ (לא כולל מארזי מתנה)</span>
+  <button type="button" class="route-chip" data-route id="route-chip"></button>
 </div></div>
 <header class="site-head">
   <div class="wrap head-row">
@@ -208,7 +211,25 @@
   function deliveryEstimate() {
     const d = new Date(), add = n => { const x = new Date(d); let k = 0; while (k < n) { x.setDate(x.getDate() + 1); if (x.getDay() < 5) k++; } return x; };
     const f = x => x.toLocaleDateString('he-IL', { weekday: 'long', day: 'numeric', month: 'numeric' });
-    return `משלוח: בין ${f(add(2))} ל${f(add(5))} · איסוף מסניף: מחר`;
+    const r = window.getRoute && getRoute();
+    if (r && r.local) return `משלוח מהסניף: היום או ${f(add(1))}`;
+    return `משלוח: בין ${f(add(2))} ל${f(add(5))}`;
+  }
+  window.deliveryEstimate = deliveryEstimate;
+  function routeChip() {
+    const el = document.getElementById('route-chip'); if (!el || !window.getRoute) return;
+    const r = getRoute();
+    el.innerHTML = r ? `ההזמנה שלכם יוצאת מסניף <b>${esc(r.branch.name)}</b> · שינוי` : 'בחרו עיר, ונשלח מהסניף הכי קרוב אליכם ←';
+  }
+  function routeBlock() {
+    const r = window.getRoute && getRoute();
+    const how = store.get('how', 'ship');
+    if (!r) return `<div class="route-mini"><b>מאיזה סניף נשלח?</b><span class="muted">ההזמנה יוצאת מהסניף הכי קרוב אליכם.</span><button type="button" class="btn sec sm" data-route>בחירת עיר</button></div>`;
+    return `<div class="route-mini"><span>ההזמנה תצא מ<b>סניף ${esc(r.branch.name)}</b> (${r.km} ק"מ מכם) · <button type="button" class="linkbtn" data-route>שינוי</button></span>
+      <div class="how" role="radiogroup" aria-label="איך מקבלים">
+        <label><input type="radio" name="how" value="ship" ${how === 'ship' ? 'checked' : ''}> ${r.local ? 'משלוח מהסניף, היום או מחר' : 'משלוח עם שליח מהסניף'}</label>
+        <label><input type="radio" name="how" value="pickup" ${how === 'pickup' ? 'checked' : ''}> איסוף מהסניף, בלי עלות</label>
+      </div></div>`;
   }
   function renderCart() {
     const c = store.get('cart', {});
@@ -232,7 +253,8 @@
       <div class="progress"><i style="width:${Math.min(100, freeBase / 450 * 100)}%"></i></div>
       ${upsell.length ? `<div class="upsell"><b style="font-size:14px">משלימים למשלוח חינם:</b>${upsell.map(p => `<div class="up"><img src="${p.img}" alt=""><span>${esc(p.name)}<br><b>${money(p.price)}</b></span><button class="btn sec sm" data-add="${p.id}">הוספה</button></div>`).join('')}</div>` : ''}
       <div style="display:flex;justify-content:space-between"><span>סה"כ משוער</span><b style="font-size:20px">${money(total)}</b></div>
-      <div class="muted" style="font-size:14px">${deliveryEstimate()}</div>
+      ${count ? routeBlock() : ''}
+      <div class="muted" style="font-size:14px">${store.get('how', 'ship') === 'pickup' && window.getRoute && getRoute() ? 'איסוף: מוכן מחר בסניף ' + esc(getRoute().branch.name) : deliveryEstimate()}</div>
       ${bulkTotal ? `<div class="muted" style="font-size:14px">5% מהמוצרים בתפזורת חוזרים לארנק: <b>${money(bulkTotal * 0.05)}</b></div>` : ''}
       <div class="muted" style="font-size:14px">במוצרים לפי משקל המחיר הוא הערכה. החיוב הסופי רק אחרי הליקוט.</div>
       <a class="btn pri" href="#" onclick="event.preventDefault();demoToast('הדמיה: כאן עוברים לקופה של ווקומרס')">לקופה</a>
@@ -244,6 +266,8 @@
     c[id] = mode === 'g' ? { mode, q: q } : { mode: mode || 'unit', q: +(cur + (q || (mode === 'kg' ? 0.25 : 1))).toFixed(2) };
     store.set('cart', c); renderCart();
     toast('נוסף לעגלה: ' + byId[id].name);
+    // first add without a branch: ask the city once, so the order goes to the nearest branch
+    if (window.getRoute && !getRoute() && !store.get('askedRoute', false)) { store.set('askedRoute', true); setTimeout(() => window.openRoute && openRoute(), 700); }
   }
   window.addToCart = addToCart;
   function openCart(open) {
@@ -298,7 +322,9 @@
       if (e.target.closest('#fcart-x') || e.target.id === 'scrim') openCart(false);
     });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') openCart(false); });
-    renderCart(); renderFavCount();
+    document.addEventListener('change', e => { if (e.target.name === 'how') { store.set('how', e.target.value); renderCart(); } });
+    document.addEventListener('route-change', () => { routeChip(); renderCart(); });
+    routeChip(); renderCart(); renderFavCount();
     if (typeof window.pageInit === 'function') window.pageInit();
   });
 })();

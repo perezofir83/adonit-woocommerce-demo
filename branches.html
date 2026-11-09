@@ -9,15 +9,28 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Assistant:wght@400;600;700&display=swap">
 <link rel="icon" href="assets/img/site/logo.png">
-<link rel="stylesheet" href="assets/css/site.css?v=5">
+<link rel="stylesheet" href="assets/css/site.css?v=7">
 </head>
 <body>
 <main class="wrap">
   <div class="page-head">
     <nav class="crumbs" aria-label="פירורי לחם"><a href="index.html">דף הבית</a><span>›</span><span>סניפים וסדנאות</span></nav>
     <h1>בקרו אותנו בסניפים</h1>
-    <p>8 סניפים, אתר אחד. מה שקונים באתר אפשר לאסוף מכל סניף, והארנק של המועדון עובד בכל מקום.</p>
+    <p>8 סניפים, אתר אחד. כל הזמנה באתר יוצאת מהסניף הכי קרוב אליכם, והארנק של המועדון עובד בכל מקום.</p>
   </div>
+
+  <section class="sec" id="how" style="padding-top:12px;scroll-margin-top:20px">
+    <div class="card" style="padding:24px;display:flex;flex-direction:column;gap:16px;background:var(--green-soft);border:0">
+      <h2>הזמנה אחת. הסניף הקרוב אליכם.</h2>
+      <div class="grid" style="gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))">
+        <div class="card" style="padding:16px"><b>1. בוחרים עיר</b><p class="muted" style="margin:4px 0 0">או מאשרים מיקום. פעם אחת, והאתר זוכר.</p></div>
+        <div class="card" style="padding:16px"><b>2. האתר מוצא סניף</b><p class="muted" style="margin:4px 0 0">ההזמנה עוברת אוטומטית לסניף הכי קרוב, עם המלאי שלו.</p></div>
+        <div class="card" style="padding:16px"><b>3. הסניף מכין</b><p class="muted" style="margin:4px 0 0">שוקלים, אורזים ומחייבים לפי המשקל האמיתי.</p></div>
+        <div class="card" style="padding:16px"><b>4. מקבלים</b><p class="muted" style="margin:4px 0 0">עד 15 ק"מ מהסניף: משלוח מהסניף, היום או מחר. רחוק יותר: שליח מהסניף. או איסוף בלי עלות.</p></div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn pri" data-route>בדיקה: מאיזה סניף נשלח אליי?</button><span id="my-branch" class="muted"></span></div>
+    </div>
+  </section>
 
   <section class="sec" style="padding-top:16px">
     <div class="with-side">
@@ -40,8 +53,9 @@
     </div>
   </section>
 </main>
-<script src="assets/js/data.js?v=5"></script>
-<script src="assets/js/app.js?v=5"></script>
+<script src="assets/js/data.js?v=7"></script>
+<script src="assets/js/branches.js?v=7"></script>
+<script src="assets/js/app.js?v=7"></script>
 <script>
 window.pageInit = function () {
   const B = [
@@ -60,10 +74,19 @@ window.pageInit = function () {
     '@type': 'GroceryStore', name: 'אדונית התבלינים · סניף ' + n, parentOrganization: { '@id': 'https://www.adonithatavlinim.co.il/#org' },
     telephone: t, address: { '@type': 'PostalAddress', streetAddress: a, addressLocality: n === 'M הדרך' ? 'בית חירות' : n, addressCountry: 'IL' },
     openingHours: h, image: new URL('assets/img/site/logo.png', location.href).href, priceRange: '₪₪' })) });
-  document.getElementById('branches').innerHTML = B.map(([n, a, t, h]) => `<div class="card" style="padding:18px;display:flex;flex-direction:column;gap:4px">
-    <div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><h3 style="font-size:20px">סניף ${n}</h3>${n === 'M הדרך' ? '<span class="tag green">פתוח גם בשבת</span>' : ''}</div>
+  // which cities each branch serves = the cities for which it is the nearest branch
+  const served = {};
+  Object.keys(CITIES).forEach(c => { const r = routeFor(c); (served[r.branch.name] = served[r.branch.name] || []).push(c); });
+  const draw = () => {
+    const mine = getRoute();
+    document.getElementById('my-branch').innerHTML = mine ? `ההזמנות שלכם (${esc(mine.city)}) יוצאות מ<b>סניף ${esc(mine.branch.name)}</b>.` : '';
+    document.getElementById('branches').innerHTML = B.map(([n, a, t, h]) => `<div class="card" style="padding:18px;display:flex;flex-direction:column;gap:4px;${mine && mine.branch.name === n ? 'border:2px solid var(--green)' : ''}">
+    <div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><h3 style="font-size:20px">סניף ${n}</h3>${mine && mine.branch.name === n ? '<span class="tag green">הסניף שלכם</span>' : n === 'M הדרך' ? '<span class="tag green">פתוח גם בשבת</span>' : ''}</div>
     <span>${a}</span><span class="muted">${h}</span><span style="direction:ltr;text-align:right">${t}</span>
+    <span style="font-size:14px;margin-top:4px"><b>שולח ל:</b> ${(served[n] || []).join(', ')}</span>
     <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap"><a class="btn sec sm" href="https://waze.com/ul?q=${encodeURIComponent('אדונית התבלינים ' + n)}" target="_blank" rel="noopener">ניווט</a><span class="tag" style="align-self:center">איסוף עצמי</span></div></div>`).join('');
+  };
+  draw(); document.addEventListener('route-change', draw);
 };
 </script>
 </body>

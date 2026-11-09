@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Assistant:wght@400;600;700&display=swap">
 <link rel="icon" href="assets/img/site/logo.png">
-<link rel="stylesheet" href="assets/css/site.css?v=5">
+<link rel="stylesheet" href="assets/css/site.css?v=7">
 <style>
 .sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0}
 .sum div{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px}
@@ -37,6 +37,38 @@ tr:target td{background:var(--gold-soft)}
       <div class="card" style="padding:20px"><b>"עיצוב מעוגל ונעים לעין" (כרמלה)</b><p class="muted" style="margin:6px 0 0">כל ההדמיה בנויה בפינות מעוגלות וכפתורים עגולים. בפועל: תבנית Blocksy החינמית.</p></div>
       <div class="card" style="padding:20px"><b>מועדון: 5% צבירה על תפזורת, מחובר לקומקס</b><p class="muted" style="margin:6px 0 0">הצבירה באתר: TeraWallet (חינם, לפי קטגוריה). החיבור לקופות קומקס: ספק בתשלום (Bee1 או Easy-WP). צריך לבקש מהם הדגמה ולוודא סנכרון מועדון לשני הכיוונים.</p></div>
       <div class="card" style="padding:20px"><b>"העגלה הצפה בצד שמאל" (טבע קסטל)</b><p class="muted" style="margin:6px 0 0">כפתור העגלה צף בצד שמאל בכל דף, ונפתח כמגירה. בפועל: Side Cart WooCommerce (חינם).</p></div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:0" id="routing">
+    <div class="sec-head"><div class="t"><h2>אתר אחד, הסניף הקרוב מקבל את ההזמנה</h2><p>איך האתר מנתב כל הזמנה לסניף הכי קרוב ללקוח, ומה צריך כדי שזה יעבוד. הבדיקה נעשתה בנובמבר 2026.</p></div></div>
+    <div class="grid g2">
+      <div class="card" style="padding:22px;display:flex;flex-direction:column;gap:10px">
+        <span class="tag green" style="align-self:flex-start">מסלול פשוט · כ-100-200$ + שעות פיתוח</span>
+        <ol style="margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:6px">
+          <li>אזור משלוח לכל סניף, לפי רשימת ערים ומיקודים. <a href="#zones">אזורי משלוח</a></li>
+          <li>8 נקודות איסוף עצמי. <a href="#pickup">איסוף מקומי</a></li>
+          <li>מייל ההזמנה נשלח לסניף לפי האזור או נקודת האיסוף.</li>
+          <li>מלאי אחד משותף מקומקס, והחיוב ב-J5 רק על מה שנלקט. <a href="#j5">PayPlus</a></li>
+          <li>חלונות זמן ושעת סגירה לכל אזור, ומשתמש מנהל לכל סניף. <a href="#slots">Delivery Date</a></li>
+        </ol>
+      </div>
+      <div class="card" style="padding:22px;display:flex;flex-direction:column;gap:10px">
+        <span class="tag" style="align-self:flex-start">מסלול מלא · מומלץ לטווח ארוך</span>
+        <ol style="margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:6px">
+          <li>MultiLoca עם 8 סניפים, וכלל "הסניף הכי קרוב לכתובת". <a href="#multiloca">MultiLoca</a></li>
+          <li>חיבור לקומקס שמעביר מלאי לכל סניף, ושולח כל הזמנה לקוד הסניף שלה. <a href="#comax">קומקס</a></li>
+          <li>כל סניף רואה ומכין רק את ההזמנות שלו.</li>
+          <li>כשחסר מלאי: מעבר לסניף הבא בתור, או פיצול ההזמנה.</li>
+          <li>חלונות זמן, וחיוב J5 אחרי הליקוט. בדיקות לפני העלייה לאוויר.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card" style="padding:22px"><h3 style="font-size:19px;margin-bottom:8px">שאלות לקומקס ול-Easy-WP</h3>
+        <ol style="margin:0;padding-inline-start:20px"><li>אפשר לסנכרן את המלאי של כל סניף בקומקס לסניף באתר?</li><li>אפשר לשלוח כל הזמנה לקוד הסניף שלה בקומקס?</li><li>אפשר לסנכרן את מועדון הלקוחות (5% על תפזורת) לשני הכיוונים?</li></ol></div>
+      <div class="card" style="padding:22px"><h3 style="font-size:19px;margin-bottom:8px">סיכונים</h3>
+        <ul style="margin:0;padding-inline-start:20px"><li>החיבור לקומקס לפי סניף לא מאומת. אולי יידרש פיתוח.</li><li>J5: אם הסכום הסופי גבוה מהמסגרת, החיוב נכשל. כדאי מסגרת גבוהה ב-10-15%.</li><li>מלאי משותף עלול להיגמר בסניף אחד.</li><li>ניתוב לפי כתובת דורש כתובות נקיות ומפתח Google.</li><li>אזורים רחוקים (ירושלים, הדרום, הצפון) נשלחים בשליח, כי אין שם סניף.</li></ul></div>
     </div>
   </section>
 
@@ -76,13 +108,14 @@ tr:target td{background:var(--gold-soft)}
     <div class="chips"><span class="chip">תרומה עם תמורה (Dear Life)</span><span class="chip">מנוי חודשי בהפתעה (אליטה אופק)</span><span class="chip">כל התבלינים מא' עד ת' (The Spice House)</span><span class="chip">שקיות מילוי (The Spice House)</span><span class="chip">מועדוני אוכל (Zingerman's)</span></div>
   </section>
 </main>
-<script src="assets/js/data.js?v=5"></script>
-<script src="assets/js/app.js?v=5"></script>
+<script src="assets/js/data.js?v=7"></script>
+<script src="assets/js/branches.js?v=7"></script>
+<script src="assets/js/app.js?v=7"></script>
 <script>
 window.pageInit = function () {
   const URL = {
     theme: 'https://wordpress.org/themes/blocksy/', megamenu: 'https://wordpress.org/plugins/megamenu/', reorder: 'https://wordpress.org/plugins/repeat-order-for-woocommerce/',
-    subs: 'https://woocommerce.com/products/woocommerce-subscriptions/', wallet: 'https://wordpress.org/plugins/woo-wallet/', comax: 'https://bee1.co.il/comax-plugin-wordpress',
+    subs: 'https://woocommerce.com/products/woocommerce-subscriptions/', wallet: 'https://wordpress.org/plugins/woo-wallet/', comax: 'https://easy-wp.co.il/downloads/woocommerce-comax-sync/', multiloca: 'https://codecanyon.net/item/woocommerce-multi-locations-inventory-management/28949586', zones: 'https://woocommerce.com/document/setting-up-shipping-zones/', pickup: 'https://woocommerce.com/document/woocommerce-blocks-local-pickup/', slots: 'https://www.tychesoftwares.com/products/woocommerce-order-delivery-date-pro-plugin/',
     unitprice: 'https://wordpress.org/plugins/unit-price-for-woocommerce/', j5: 'https://wordpress.org/plugins/payplus-payment-gateway/', whatsapp: 'https://wordpress.org/plugins/wp-whatsapp/',
     search: 'https://wordpress.org/plugins/ajax-search-for-woocommerce/', wishlist: 'https://wordpress.org/plugins/ti-woocommerce-wishlist/', giftcard: 'https://wordpress.org/plugins/pw-woocommerce-gift-cards/',
     shipbar: 'https://wordpress.org/plugins/woo-free-shipping-bar/', shipcheck: '', composite: 'https://wordpress.org/plugins/wpc-composite-products/', filter: 'https://wordpress.org/plugins/woocommerce-products-filter/',
@@ -96,6 +129,9 @@ window.pageInit = function () {
     ['הזמנה קבועה', 'כרמלה', 'account.html#fixed', 'החשבון שלי', 'subs'],
     ['מועדון לקוחות: 5% על תפזורת (לפי ההערה)', 'כרמלה', 'account.html#wallet', 'החשבון שלי', 'wallet'],
     ['חיבור המועדון לקופות קומקס', 'הערה של אדונית', 'account.html#wallet', 'החשבון שלי', 'comax'],
+    ['כל הזמנה עוברת לסניף הכי קרוב ללקוח', 'בקשה של אדונית', 'branches.html#how', 'בחירת עיר + עגלה', 'multiloca'],
+    ['איסוף עצמי מכל אחד מ-8 הסניפים', 'בקשה של אדונית', 'branches.html#how', 'עגלה', 'pickup'],
+    ['משלוח מהסניף באותו יום או למחרת, עד 15 ק"מ', 'בקשה של אדונית', 'branches.html#how', 'עגלה', 'slots'],
     ['"מה הכי כדאי היום?"', 'כרמלה', 'index.html', 'דף הבית', 'core'],
     ['בחירה בין יחידות לק"ג, ומחיר ל-100 גרם', 'כרמלה', 'product.html', 'דף מוצר', 'unitprice'],
     ['מחיר לק"ג ומחיר ל-100 גרם, זה לצד זה', 'ראס אל חנות', 'category.html?c=pure', 'כרטיס מוצר', 'unitprice'],
