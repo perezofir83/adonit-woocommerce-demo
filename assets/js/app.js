@@ -189,7 +189,7 @@
   <a class="pimg" href="product.html?id=${p.id}"><img loading="lazy" src="${p.img}" alt="${esc(p.name)}"></a>
   <h3><a href="product.html?id=${p.id}">${esc(p.name)}</a></h3>
   <div class="price-row"><span class="price" data-price>${money(p.price)}</span>
-    <span class="unit">${p.g ? `${money(per100)} ל-100 גרם<br>${money(perKg)} לק"ג` : 'מחיר ליחידה<br>&nbsp;'}</span></div>
+    <span class="unit">${p.g ? `${money(per100)} ל-100 גרם` : 'מחיר ליחידה'}</span></div>
   <span class="info">${bulk ? '5% חוזר לארנק המועדון' : 'נשלח מהסניף הקרוב'}</span>
   <button class="add" data-add="${p.id}">הוספה לעגלה</button>
 </article>`;

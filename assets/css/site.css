@@ -144,8 +144,8 @@ section.sec{padding-block:44px}
 .pcard .pimg img{width:100%;height:100%;object-fit:contain}
 .pcard h3{font:600 16px/1.3 var(--body);height:2.6em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .pcard .info{display:block;font-size:12.5px;font-weight:600;color:var(--green-dk);background:var(--green-soft);border-radius:999px;padding:5px 10px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pcard .unit{min-height:2.7em;text-align:left}
-.pcard .price-row{flex-wrap:nowrap;align-items:flex-start}
+.pcard .price-row{flex-direction:column;align-items:flex-start;gap:0}
+.pcard .unit{text-align:right;white-space:nowrap}
 .pcard .pimg{background:#fff;padding:6%}
 .pcard .badges .tag:nth-child(n+2){display:none}
 .pcard h3 a{text-decoration:none}
@@ -318,8 +318,6 @@ details.filters>summary{display:none;list-style:none}
   .pcard{padding:8px;gap:6px;border-radius:18px}
   .pcard h3{font-size:14px}
   .pcard .info{font-size:11px;padding:4px 6px}
-  .pcard .price-row{flex-direction:column;align-items:flex-start;gap:2px}
-  .pcard .unit{text-align:right;white-space:nowrap}
   .pcard .fav{top:12px;left:12px;width:32px;height:32px}
   .pcard .badges{top:12px;right:12px}
   .pcard .tag{font-size:11px;padding:3px 7px}
