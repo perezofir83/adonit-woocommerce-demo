@@ -111,8 +111,9 @@
     }).join('');
     return `
 <div class="ship-bar" id="shipbar"><div class="wrap">
-  <span class="more"><strong>משלוח חינם</strong> בהזמנה מעל 450 ₪ (לא כולל מארזי מתנה)</span>
   <button type="button" class="route-chip" data-route id="route-chip"></button>
+  <span class="more"><strong>משלוח חינם</strong> מעל 450 ₪</span>
+  <nav class="util more" aria-label="מידע"><a href="branches.html">סניפים</a><a href="recipes.html">מתכונים</a><a href="business.html">לעסקים</a><a href="help.html">שאלות נפוצות</a><a href="tel:0533303169" style="direction:ltr">053-3303169</a></nav>
 </div></div>
 <header class="site-head">
   <div class="wrap head-row">
@@ -128,20 +129,13 @@
       </div>
     </form>
     <div class="head-actions">
-      <a class="hbtn phone" href="tel:0533303169" aria-label="טלפון הזמנות 053-3303169">${ICON.phone}<span>053-3303169</span></a>
-      <a class="hbtn reorder" href="account.html#reorder">${ICON.redo}<span>שחזור הזמנה</span></a>
-      <a class="hbtn fixed" href="account.html#fixed">הזמנה קבועה</a>
-      <a class="hbtn icon" href="account.html#favs" aria-label="מועדפים">${ICON.heart}<span class="count" id="fav-count">0</span></a>
-      <a class="hbtn icon" href="account.html" aria-label="החשבון שלי">${ICON.user}</a>
+      <a class="hbtn icon" href="account.html" aria-label="החשבון שלי: שחזור הזמנה, הזמנה קבועה, מועדפים">${ICON.user}<span class="lbl">החשבון שלי</span></a>
       <button class="hbtn icon cart-h" type="button" id="fcart-btn-h" aria-label="העגלה">${ICON.cart}<span class="count" id="cart-count-h">0</span></button>
     </div>
   </div>
   <nav class="mainnav" aria-label="קטגוריות"><div class="wrap">
     ${mega}
     <div class="mn-item accent"><a href="category.html?c=sale">מבצעים</a></div>
-    <div class="nav-extra">
-      <a href="recipes.html">מתכונים</a><a href="branches.html">סניפים וסדנאות</a><a href="business.html">המחלקה העסקית</a><a href="help.html">שאלות נפוצות</a>
-    </div>
   </div></nav>
 </header>`;
   }
@@ -151,8 +145,8 @@
 <footer class="site-foot"><div class="wrap">
   <div class="cols">
     <div><h4>אדונית התבלינים</h4><p style="margin:0">ברוכים הבאים לגן עדן לחובבי אוכל! אלפי מוצרים מכל העולם, תבלינים טהורים ותערובות בייצור עצמי, וקפה שנטחן במקום.</p></div>
-    <div><h4>קנייה</h4><a href="help.html#shipping">משלוחים</a><a href="help.html#returns">החזרות</a><a href="help.html#expect">תיאום ציפיות לפני רכישה</a><a href="account.html#giftcard">גיפט קארד</a><a href="help.html">שאלות נפוצות</a></div>
-    <div><h4>אדונית</h4><a href="about.html">הסיפור שלנו</a><a href="branches.html">סניפים וסדנאות</a><a href="business.html">המחלקה העסקית</a><a href="help.html#kosher">כשרות</a><a href="#">זכיינות</a></div>
+    <div><h4>קנייה</h4><a href="help.html#shipping">משלוחים</a><a href="help.html#returns">החזרות</a><a href="help.html#expect">תיאום ציפיות לפני רכישה</a><a href="account.html#reorder">שחזור הזמנה</a><a href="account.html#fixed">הזמנה קבועה</a><a href="account.html#wallet">המועדון: 5% חוזר</a><a href="account.html#giftcard">גיפט קארד</a><a href="help.html">שאלות נפוצות</a></div>
+    <div><h4>אדונית</h4><a href="about.html">הסיפור שלנו</a><a href="branches.html">סניפים וסדנאות</a><a href="business.html">המחלקה העסקית</a><a href="recipes.html">מתכונים</a><a href="help.html#kosher">כשרות</a><a href="#">זכיינות</a></div>
     <form class="news" onsubmit="event.preventDefault();demoToast('הדמיה: נרשמתם לעדכונים')"><h4>[X]% הנחה להזמנה הראשונה</h4><p style="margin:0 0 8px">הצטרפו לעדכונים: מבצעים, מתכונים ומארזים לחג.</p><label class="sr" for="news-mail">מייל או נייד</label><input id="news-mail" placeholder="מייל או נייד"><button class="btn gold sm" style="margin-top:8px">הצטרפות</button></form>
     <div><h4>דברו איתנו</h4><span>שירות לקוחות: 053-3303169</span><br><span>א'-ה' 09:00-17:00</span><br><span>אדונית לעסקים: 053-3013043</span><br><span>adonitoffice@gmail.com</span></div>
   </div>
@@ -165,7 +159,7 @@
   <div class="items" id="fcart-items"></div>
   <footer id="fcart-foot"></footer>
 </aside>
-<div class="wa-fab">
+<div class="wa-fab" ${/product|help/.test(location.pathname) ? '' : 'hidden'}>
   <a href="https://wa.me/972533303169" target="_blank" rel="noopener">${ICON.wa}<span>הזמנה בוואטסאפ<small>מענה א'-ה' 09:00-17:00</small></span></a>
 </div>
 <div class="toast" id="toast" role="status"></div>`;
@@ -190,7 +184,6 @@
   <h3><a href="product.html?id=${p.id}">${esc(p.name)}</a></h3>
   <div class="price-row"><span class="price" data-price>${money(p.price)}</span>
     <span class="unit">${p.g ? `${money(per100)} ל-100 גרם` : 'מחיר ליחידה'}</span></div>
-  <span class="info">${bulk ? '5% חוזר לארנק המועדון' : 'נשלח מהסניף הקרוב'}</span>
   <button class="add" data-add="${p.id}">הוספה לעגלה</button>
 </article>`;
   }
